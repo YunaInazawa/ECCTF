@@ -16,6 +16,7 @@ class CreateChoicesTable extends Migration
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

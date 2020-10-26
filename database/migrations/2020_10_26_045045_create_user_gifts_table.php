@@ -16,6 +16,7 @@ class CreateUserGiftsTable extends Migration
         Schema::create('user_gifts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
