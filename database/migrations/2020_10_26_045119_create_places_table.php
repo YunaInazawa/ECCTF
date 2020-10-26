@@ -15,6 +15,14 @@ class CreatePlacesTable extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
+            $table->integer('card_num');
+            $table->integer('position_num');
+            $table->string('room_name');
+            $table->string('image_path')->nullable();
+            $table->foreignId('level_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

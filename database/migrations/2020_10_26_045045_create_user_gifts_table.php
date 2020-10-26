@@ -15,6 +15,15 @@ class CreateUserGiftsTable extends Migration
     {
         Schema::create('user_gifts', function (Blueprint $table) {
             $table->id();
+            $table->string('quantity');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('gift_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
