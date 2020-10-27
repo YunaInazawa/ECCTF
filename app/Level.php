@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Level extends Model
 {
     use SoftDeletes;
+
+    // 子テーブル
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
+    public function places()
+    {
+        return $this->hasMany('App\Place');
+    }
 }

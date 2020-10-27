@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Type extends Model
 {
     use SoftDeletes;
+
+    // 子テーブル
+    public function types()
+    {
+        return $this->hasMany('App\Type');
+    }
 }
