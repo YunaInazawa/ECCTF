@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->string('text');
             $table->string('commentary')->nullable();
+            $table->string('identification');
             $table->foreignId('genre_id')
                 ->constrained()
                 ->cascadeOnDelete()
