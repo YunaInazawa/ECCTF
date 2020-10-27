@@ -15,6 +15,14 @@ class PlayerController extends Controller
     }
 
     /**
+     * 正解 / 不正解 判定
+     */
+    public function answer() {
+
+        return redirect()->route('player.commentary');
+    }
+
+    /**
      * 04_解説画面
      */
     public function commentary() {
