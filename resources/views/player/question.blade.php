@@ -3,5 +3,11 @@
 @section('title', 'question')
 
 @section('content')
-    question
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            question
+        </div>
+    </div>
+</div>
 @endsection
