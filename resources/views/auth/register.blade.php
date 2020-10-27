@@ -10,6 +10,20 @@
                 @csrf
 
                 <div class="form-group row">
+                    <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Course') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
+
+                        @error('course')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                     <div class="col-md-6">
@@ -30,6 +44,20 @@
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="student_num" class="col-md-4 col-form-label text-md-right">{{ __('Student_num') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="student_num" type="text" class="form-control @error('student_num') is-invalid @enderror" name="student_num" value="{{ old('student_num') }}" required autocomplete="student_num" autofocus>
+
+                        @error('student_num')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
