@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->integer('point');
+            $table->integer('point')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
