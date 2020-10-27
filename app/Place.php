@@ -14,4 +14,9 @@ class Place extends Model
     {
         return $this->hasMany('App\Answer');
     }
+    // 親テーブル
+    public function level()
+    {
+        return $this->belongsTo('App\Level');
+    }
 }

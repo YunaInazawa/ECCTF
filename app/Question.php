@@ -18,4 +18,18 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer');
     }
+
+    // 親テーブル
+    public function genre()
+    {
+        return $this->belongsTo('App\Genre');
+    }
+    public function type()
+    {
+        return $this->belongsTo('App\Type');
+    }
+    public function level()
+    {
+        return $this->belongsTo('App\Level');
+    }
 }

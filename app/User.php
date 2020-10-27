@@ -18,4 +18,10 @@ class User extends Model
     {
         return $this->hasMany('App\UserGift');
     }
+
+    // 親テーブル
+    public function course()
+    {
+        return $this->belongsTo('App\Course');
+    }
 }
