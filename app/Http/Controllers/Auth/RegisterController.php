@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Course;
 
 class RegisterController extends Controller
 {
@@ -50,8 +51,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'course' => ['required'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'student_num' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +67,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $course_id = Course::where('name', $data['course'])->first()->id;
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'student_num' => $data['student_num'],
             'password' => Hash::make($data['password']),
+            'course_id' => $course_id,
         ]);
     }
 }

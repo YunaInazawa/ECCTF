@@ -1,3 +1,7 @@
+<?php
+$course_list = ['IE3A', 'IE4A'];
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,7 +17,12 @@
                     <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Course') }}</label>
 
                     <div class="col-md-6">
-                        <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
+                        <select id="course" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
+                            <option value="">選択してください</option>
+                            @foreach( $course_list as $list )
+                            <option value="{{ $list }}">{{ $list }}</option>
+                            @endforeach
+                        </select>
 
                         @error('course')
                             <span class="invalid-feedback" role="alert">
