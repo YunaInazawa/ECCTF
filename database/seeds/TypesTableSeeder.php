@@ -13,10 +13,10 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $names = [];
+        $names = ['択一クイズ', '二択クイズ', '多答クイズ', '穴抜けコード', '一問一答'];
 
         foreach( $names as $name ){
-            DB::table('elements')->insert([
+            DB::table('types')->insert([
                 'name' => $name,
                 'created_at' => $now, 
                 'updated_at' => $now,

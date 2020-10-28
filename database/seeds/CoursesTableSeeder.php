@@ -14,10 +14,13 @@ class CoursesTableSeeder extends Seeder
     {
         $now = Carbon::now();
         $names = ['IE1A', 'IE2A', 'IE3A', 'IE4A', 'SE1A', 'SE2A', 'SE3A', '...'];
+        $cards = ['IT下級生用', 'IT下級生用', 'IT上級生用', 'IT上級生用', 'IT下級生用', 'IT下級生用', 'IT上級生用', 'その他'];
 
-        foreach( $names as $name ){
+        for( $i = 0; $i < count($names); $i++ ){
+            $card_id = DB::table('cards')->where('name', $cards[$i])->first()->id;
             DB::table('courses')->insert([
-                'name' => $name,
+                'name' => $names[$i],
+                'card_id' => $card_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
             ]);
