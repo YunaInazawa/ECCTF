@@ -13,7 +13,7 @@ class LevelsTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $names = ['共通', '上級生用', '下級生用'];
+        $names = ['TEST', '共通', '上級', '下級'];
 
         foreach( $names as $name ){
             DB::table('levels')->insert([

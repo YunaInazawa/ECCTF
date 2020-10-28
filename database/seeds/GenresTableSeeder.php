@@ -13,7 +13,7 @@ class GenresTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $names = ['学校/全体', '学校/先生', '学校/生徒', '勉学/PC基礎', '勉学/国家試験', '勉学/プログラミング'];
+        $names = ['TEST', '学校/全体', '学校/先生', '学校/生徒', '勉学/PC基礎', '勉学/国家試験', '勉学/プログラミング'];
 
         foreach( $names as $name ){
             DB::table('genres')->insert([
