@@ -12,6 +12,15 @@ class LevelsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $now = Carbon::now();
+        $names = [];
+
+        foreach( $names as $name ){
+            DB::table('elements')->insert([
+                'name' => $name,
+                'created_at' => $now, 
+                'updated_at' => $now,
+            ]);
+        }
     }
 }
