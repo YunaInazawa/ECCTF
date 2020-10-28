@@ -10,8 +10,12 @@ class Genre extends Model
     use SoftDeletes;
 
     // 子テーブル
-    public function genres()
+    public function questions()
     {
-        return $this->hasMany('App\Genre');
+        return $this->hasMany('App\Question');
+    }
+    public function places()
+    {
+        return $this->hasMany('App\Place');
     }
 }
