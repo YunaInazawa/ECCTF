@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/question', 'PlayerController@question')->name('player.question');
+Route::post('/answer', 'PlayerController@answer')->name('player.answer');
 Route::get('/commentary', 'PlayerController@commentary')->name('player.commentary');
 Route::get('/my_page', 'PlayerController@my_page')->name('player.my_page');
 Route::get('/challenge', 'PlayerController@challenge')->name('player.challenge');
