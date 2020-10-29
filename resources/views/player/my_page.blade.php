@@ -13,6 +13,10 @@ $gift_num = [1, 2, 1];
 
 @section('title', 'my_page')
 
+@section('stylesheet')
+<link href="{{ asset('css/my_page.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="col-md-12">
     <form class="text-center" action="http://localhost:8000/challenge">
@@ -46,12 +50,13 @@ $gift_num = [1, 2, 1];
         </div>
 
         @for( $i = 0; $i < count($gift_name); $i++ )
-        <div class="form-group row" style="height: 100px;">
-            <div class="col-md-5" style="background: #000;">img</div>
+        <div class="form-group row gift-box">
+            <div class="col-md-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
             <div class="col-md-4 text-left">
                 景品名：{{ $gift_name[$i] }}<br/>
                 応募数：{{ $gift_num[$i] }}
             </div>
+            <div class="col-md-1 text-right">×</div>
         </div>
         @endfor
                 
