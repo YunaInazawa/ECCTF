@@ -1,20 +1,78 @@
+<?php  
+$gift_name = ['gift01', 'gift02', 'gift03'];
+$gift_description = 
+    [
+        'Description01.<br>' . 
+        '---------------------------------<br>' . 
+        '---------------------------------',
+        'Description02.<br>' . 
+        '---------------------------------<br>' . 
+        '---------------------------------',
+        'Description03.<br>' . 
+        '---------------------------------<br>' . 
+        '---------------------------------'
+
+    ];
+$point = 5;
+
+?>
+
 @extends('layouts.app')
 
 @section('title', 'challenge')
 
+@section('stylesheet')
+<link href="{{ asset('css/challenge.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="col-md-12">
+
     <div class="card text-center">
-        <div class="card-header"><h1>CHALLENGE</h1></div>
-
         <div class="card-body">
-            <form action="{{ route('player.my_page') }}">
+            <form class="text-center" action="応募する画面">
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
 
-                <h3 class="card-text">CHALLENGE</h3>
+                <div class="d-inline p-2">
 
-                <button type="submit" class="btn btn-primary">my_page</button>
+                    <div class="form-group">
+                        <h1>{{ $gift_name[0] }}</h1>
+                    </div>
+
+                    <div class="gift-image form-group">
+                        <img class="fit-image" src="images/sampleQR.png">
+                    </div>
+
+                    <div class="form-group">
+                        <p>{!! nl2br( $gift_description[0] ) !!}</p>
+                    </div>
+
+                    <div class="form-group mx-sm-3 mb-2">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            @for( $i = 1; $i <= $point; $i++ )    
+                            <option>{{ $i }}</option>
+                            @endfor
+                        </select>
+                        
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">応募</button>
+                    
+                    
+                </div>
             </form>
         </div>
     </div>
+    <div class="text-right">
+        <a href="{{ route('player.my_page') }}">マイページへ戻る</a>
+    </div>
+
 </div>
 @endsection
