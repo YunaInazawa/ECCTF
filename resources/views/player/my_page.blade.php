@@ -59,13 +59,7 @@ $gift_num = [1, 2, 1];
             <div class="col-md-1 text-right">×</div>
         </div>
         @endfor
-                
-        <div class="form-group">
-            <p>所持ポイント：0</p>
-        </div>
-
-        <button type="button" class="btn btn-primary">challenge</button>
-
+         
     </form>
 </div>
 @endsection
