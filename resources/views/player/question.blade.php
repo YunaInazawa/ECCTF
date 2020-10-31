@@ -1,6 +1,6 @@
 <?php 
 $question_text = '問題文';
-$question_type = '0';
+$question_type = '穴抜けコード';
 $question_answer = ['選択肢1', '選択肢2', '選択肢3'];
 ?>
 
@@ -21,11 +21,20 @@ $question_answer = ['選択肢1', '選択肢2', '選択肢3'];
 
                 <div class="form-group row">
                     <div class="col-md-6 mx-auto">
-                        @if( $question_type == 0 )
+                        @if( $question_type == '択一クイズ' || $question_type == '二択クイズ' )
                             @foreach( $question_answer as $answer )
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                                 <label class="form-check-label" for="exampleRadios1">
+                                    {{ $answer }}
+                                </label>
+                            </div>
+                            @endforeach
+                        @elseif( $question_type == '多答クイズ' )
+                            @foreach( $question_answer as $answer )
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="examplechecks" id="examplechecks1" value="option1">
+                                <label class="form-check-label" for="examplechecks1">
                                     {{ $answer }}
                                 </label>
                             </div>
