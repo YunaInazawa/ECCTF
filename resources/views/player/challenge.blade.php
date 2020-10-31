@@ -15,11 +15,17 @@ $gift_description =
     ];
 $point = 5;
 
+$json_name = json_encode($gift_name);
+$json_description = json_encode($gift_description);
 ?>
 
 @extends('layouts.app')
 
 @section('title', 'challenge')
+
+@section('stylesheet')
+<script src="{{ asset('js/challenge.js') }}" defer></script>
+@endsection
 
 @section('stylesheet')
 <link href="{{ asset('css/challenge.css') }}" rel="stylesheet">
@@ -43,27 +49,21 @@ $point = 5;
                 </div>
                 
                 <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" id="selectGift" onChange="changeSelect({{ $json_name }}, {{ $json_description }})">
                         <option value="">選択してください</option>
-                        @foreach( $gift_name as $name )
-                        <option value="{{ $name }}">{{ $name }}</option>
-                        @endforeach
+                        @for( $i = 0; $i < count($gift_name); $i++ )
+                        <option value="{{ $i }}">{{ $gift_name[$i] }}</option>
+                        @endfor
                     </select>
                 </div>
 
-                <div class="d-inline p-2">
+                <div id="display" class="d-none p-2">
 
-                    <div class="form-group">
-                        <h1>{{ $gift_name[0] }}</h1>
-                    </div>
+                    <div id="giftName" class="form-group"></div>
 
-                    <div class="gift-image form-group">
-                        <img class="fit-image" src="images/sampleQR.png">
-                    </div>
+                    <div id="giftImage" class="gift-image form-group"></div>
 
-                    <div class="form-group">
-                        <p>{!! nl2br( $gift_description[0] ) !!}</p>
-                    </div>
+                    <div id="giftDescription" class="form-group"></div>
 
                     <div class="form-group row">
                         <div class="offset-4 col-md-3">
