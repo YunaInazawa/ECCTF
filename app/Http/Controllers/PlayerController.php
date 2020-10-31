@@ -70,9 +70,29 @@ class PlayerController extends Controller
     /**
      * 抽選に応募する
      */
-    public function apply() {
+    public function apply( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $giftId = $request->gift_id;
+        $applyNum = $request->apply_num;
+
+        if( UserGift::where('user_id', Auth::id())->where('gift_id', $giftId)->count() ){
+            $applyData = UserGift::where('user_id', Auth::id())->where('gift_id', $giftId)->first();
+            $quantityNow = $applyData->quantity;
+            $applyData->quantity = ($quantityNow + $applyNum);
+            $applyData->save();
+        }else{
+            $applyData = new UserGift;
+            $applyData->quantity = $applyNum;
+            $applyData->user_id = Auth::id();
+            $applyData->gift_id = $giftId;
+            $applyData->save();
+        }
+
+        $giftName = Gift::find($applyData->id)->name;
+
+        $msg = $giftName . ' に ' . $applyNum . 'P 応募しました';
 
         return redirect()->route('player.challenge')
-            ->with('flash_message', '応募が完了しました');
+            ->with('flash_message', $msg);
     }
 }

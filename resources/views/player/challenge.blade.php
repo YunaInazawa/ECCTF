@@ -68,14 +68,19 @@ $json_description = json_encode($gift_description);
 
                     <div class="form-group row">
                         <div class="offset-4 col-md-3">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                @for( $i = 1; $i <= $pointNow; $i++ )    
-                                <option value="{{ $i }}">{{ $i }} P</option>
-                                @endfor
+                            <select class="form-control" name="apply_num">
+                                @if( $pointNow == 0 )
+                                    <option value="0">0 P</option>
+                                @else
+                                    @for( $i = 1; $i <= $pointNow; $i++ )    
+                                    <option value="{{ $i }}">{{ $i }} P</option>
+                                    @endfor
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-5 text-left">
-                            <button type="submit" class="btn btn-primary mb-2">応募</button>
+                            <div id="hide"></div>
+                            <button type="submit" class="btn btn-primary mb-2" <?php if($pointNow == 0){ echo 'disabled'; } ?>>応募</button>
                         </div>
                     </div>
                     
