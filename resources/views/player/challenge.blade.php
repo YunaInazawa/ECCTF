@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control" id="selectGift" onChange="changeSelect({{ $giftsData }})">
+                    <select class="form-control" id="selectGift" onChange="changeGift({{ $giftsData }})">
                         <option value="">選択してください</option>
                         @foreach( $giftsData as $data )
                         <option value="{{ $data->id }}">{{ $data->name }}</option>
@@ -46,7 +46,7 @@
 
                     <div class="form-group row">
                         <div class="offset-4 col-md-3">
-                            <select class="form-control" name="apply_num">
+                            <select class="form-control" id="apply_num" name="apply_num" onChange="changeNum()">
                                 @if( $pointNow == 0 )
                                     <option value="0">0 P</option>
                                 @else
@@ -58,7 +58,41 @@
                         </div>
                         <div class="col-md-5 text-left">
                             <div id="hide"></div>
-                            <button type="submit" class="btn btn-primary mb-2" <?php if($pointNow == 0){ echo 'disabled'; } ?>>応募</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" <?php if($pointNow == 0){ echo 'disabled'; } ?>>
+                                応募
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div id="modal-image" class="col-md-6"></div>
+                                                            <div class="col-md-6 pt-5">
+                                                                <span id="modal-text"></span>
+                                                                <span id="apply-num">1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                                            <button type="submit" class="btn btn-primary">応募する</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
