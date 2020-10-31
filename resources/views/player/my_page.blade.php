@@ -1,9 +1,4 @@
 <?php  
-$user_name = 'hoge';
-$user_num = '2170001';
-$user_course = 'IE3A';
-$user_point = 0;
-
 $gift_name = ['gift01', 'gift02', 'gift03'];
 $gift_num = [1, 2, 1];
 
@@ -29,7 +24,7 @@ $gift_num = [1, 2, 1];
         </div>
 
         <div class="form-group">
-            <p>所持ポイント：{{ $user_point }}</p>
+            <p>所持ポイント：{{ Auth::user()->point }}</p>
         </div>
 
         <button type="submit" class="btn btn-primary">challenge</button>
@@ -38,8 +33,8 @@ $gift_num = [1, 2, 1];
 
     <div class="card text-center my-5">
         <div class="card-body">
-            [ {{ $user_num }} ]<br />
-            < {{ $user_course }} > {{ $user_name }}
+            [ {{ Auth::user()->student_num }} ]<br />
+            < {{ Auth::user()->course->name }} > {{ Auth::user()->name }}
 
         </div>
     </div>
