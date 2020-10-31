@@ -33,11 +33,10 @@ $point = 5;
             <form class="text-center" action="応募する画面">
                 <div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="">選択してください</option>
+                        @foreach( $gift_name as $name )
+                        <option value="{{ $name }}">{{ $name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -59,7 +58,7 @@ $point = 5;
                         <div class="offset-4 col-md-3">
                             <select class="form-control" id="exampleFormControlSelect1">
                                 @for( $i = 1; $i <= $point; $i++ )    
-                                <option>{{ $i }}</option>
+                                <option>{{ $i }} P</option>
                                 @endfor
                             </select>
                         </div>
