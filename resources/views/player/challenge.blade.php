@@ -55,16 +55,18 @@ $point = 5;
                         <p>{!! nl2br( $gift_description[0] ) !!}</p>
                     </div>
 
-                    <div class="form-group mx-sm-3 mb-2">
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            @for( $i = 1; $i <= $point; $i++ )    
-                            <option>{{ $i }}</option>
-                            @endfor
-                        </select>
-                        
+                    <div class="form-group row">
+                        <div class="offset-4 col-md-3">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                @for( $i = 1; $i <= $point; $i++ )    
+                                <option>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-5 text-left">
+                            <button type="submit" class="btn btn-primary mb-2">応募</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">応募</button>
-                    
                     
                 </div>
             </form>
