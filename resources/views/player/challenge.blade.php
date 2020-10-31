@@ -30,7 +30,18 @@ $point = 5;
 
     <div class="card text-center">
         <div class="card-body">
-            <form class="text-center" action="応募する画面">
+            <form method="POST" class="text-center" action="{{ route('player.apply') }}">
+                @csrf
+
+                <div class="form-group">
+                    <!-- フラッシュメッセージ -->
+                    @if (session('flash_message'))
+                        <div class="flash_message">
+                            {{ session('flash_message') }}
+                        </div>
+                    @endif
+                </div>
+                
                 <div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect1">
                         <option value="">選択してください</option>

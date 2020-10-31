@@ -45,4 +45,13 @@ class PlayerController extends Controller
         
         return view('player.challenge');
     }
+
+    /**
+     * 抽選に応募する
+     */
+    public function apply() {
+
+        return redirect()->route('player.challenge')
+            ->with('flash_message', '応募が完了しました');
+    }
 }
