@@ -1,0 +1,10 @@
+.gift-box {
+    height: 150px;
+
+}
+
+.fit-image {
+    object-fit: cover;
+    height: 150px;
+
+}
