@@ -24,7 +24,7 @@ $gift_num = [1, 2, 1];
         </div>
 
         <div class="form-group">
-            <p>所持ポイント：{{ Auth::user()->point }}</p>
+            <p>所持ポイント：{{ $pointNow }}</p>
         </div>
 
         <button type="submit" class="btn btn-primary">challenge</button>

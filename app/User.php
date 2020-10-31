@@ -35,6 +35,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Answer');
     }
+    public function user_gifts()
+    {
+        return $this->hasMany('App\UserGift');
+    }
 
     // 親テーブル
     public function course()
@@ -42,9 +46,4 @@ class User extends Authenticatable
         return $this->belongsTo('App\Course');
     }
 
-    // users - user_gifts - gift
-    public function gifts(){
-        return $this->belongsToMany('App\Gift', 'user_gifts')
-            ->withTimestamps();
-    }
 }

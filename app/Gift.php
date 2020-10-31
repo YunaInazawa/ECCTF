@@ -9,9 +9,9 @@ class Gift extends Model
 {
     use SoftDeletes;
 
-    // users - user_gifts - gift
-    public function users(){
-        return $this->belongsToMany('App\User', 'user_gifts')
-            ->withTimestamps();
+    // 子テーブル
+    public function user_gifts()
+    {
+        return $this->hasMany('App\UserGift');
     }
 }

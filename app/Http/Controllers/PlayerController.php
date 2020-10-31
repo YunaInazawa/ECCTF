@@ -47,8 +47,15 @@ class PlayerController extends Controller
      * 05_マイページ画面
      */
     public function my_page() {
+        $applyGifts = UserGift::where('user_id', Auth::id())->get();
+        $usePoint = 0;
+
+        foreach( $applyGifts as $ag ){
+            $usePoint += $ag->quantity;
+        }
+        $pointNow = (Auth::user()->point) - $usePoint;
         
-        return view('player.my_page');
+        return view('player.my_page', ['pointNow' => $pointNow]);
     }
 
     /**
@@ -88,9 +95,7 @@ class PlayerController extends Controller
             $applyData->save();
         }
 
-        $giftName = Gift::find($applyData->id)->name;
-
-        $msg = $giftName . ' に ' . $applyNum . 'P 応募しました';
+        $msg = $applyData->gift->name . ' に ' . $applyNum . 'P 応募しました';
 
         return redirect()->route('player.challenge')
             ->with('flash_message', $msg);

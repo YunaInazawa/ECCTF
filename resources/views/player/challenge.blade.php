@@ -1,25 +1,3 @@
-<?php  
-$gift_name = ['gift01', 'gift02', 'gift03'];
-$gift_description = 
-    [
-        'Description01.<br>' . 
-        '---------------------------------<br>' . 
-        '---------------------------------',
-        'Description02.<br>' . 
-        '---------------------------------<br>' . 
-        '---------------------------------',
-        'Description03.<br>' . 
-        '---------------------------------<br>' . 
-        '---------------------------------'
-
-    ];
-$point = 5;
-
-$json_name = json_encode($gift_name);
-$json_description = json_encode($gift_description);
-
-?>
-
 @extends('layouts.app')
 
 @section('title', 'challenge')
