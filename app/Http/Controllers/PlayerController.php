@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Gift;
+use App\UserGift;
 
 class PlayerController extends Controller
 {
@@ -15,7 +18,7 @@ class PlayerController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * 03_問題画面
      */
@@ -52,8 +55,16 @@ class PlayerController extends Controller
      * 06_抽選申込画面
      */
     public function challenge() {
+        $giftsData = Gift::all();
+        $applyGifts = UserGift::where('user_id', Auth::id())->get();
+        $usePoint = 0;
+
+        foreach( $applyGifts as $ag ){
+            $usePoint += $ag->quantity;
+        }
+        $pointNow = (Auth::user()->point) - $usePoint;
         
-        return view('player.challenge');
+        return view('player.challenge', ['giftsData' => $giftsData, 'pointNow' => $pointNow]);
     }
 
     /**

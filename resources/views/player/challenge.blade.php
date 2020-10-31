@@ -17,6 +17,7 @@ $point = 5;
 
 $json_name = json_encode($gift_name);
 $json_description = json_encode($gift_description);
+
 ?>
 
 @extends('layouts.app')
@@ -47,13 +48,13 @@ $json_description = json_encode($gift_description);
                         </div>
                     @endif
                 </div>
-                
+
                 <div class="form-group">
-                    <select class="form-control" id="selectGift" onChange="changeSelect({{ $json_name }}, {{ $json_description }})">
+                    <select class="form-control" id="selectGift" onChange="changeSelect({{ $giftsData }})">
                         <option value="">選択してください</option>
-                        @for( $i = 0; $i < count($gift_name); $i++ )
-                        <option value="{{ $i }}">{{ $gift_name[$i] }}</option>
-                        @endfor
+                        @foreach( $giftsData as $data )
+                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -68,8 +69,8 @@ $json_description = json_encode($gift_description);
                     <div class="form-group row">
                         <div class="offset-4 col-md-3">
                             <select class="form-control" id="exampleFormControlSelect1">
-                                @for( $i = 1; $i <= $point; $i++ )    
-                                <option>{{ $i }} P</option>
+                                @for( $i = 1; $i <= $pointNow; $i++ )    
+                                <option value="{{ $i }}">{{ $i }} P</option>
                                 @endfor
                             </select>
                         </div>
