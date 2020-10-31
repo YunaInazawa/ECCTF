@@ -47,15 +47,15 @@ class PlayerController extends Controller
      * 05_マイページ画面
      */
     public function my_page() {
-        $applyGifts = UserGift::where('user_id', Auth::id())->get();
+        $applyGifts = Auth::user()->gifts;
         $usePoint = 0;
 
         foreach( $applyGifts as $ag ){
-            $usePoint += $ag->quantity;
+            $usePoint += $ag->pivot->quantity;
         }
         $pointNow = (Auth::user()->point) - $usePoint;
         
-        return view('player.my_page', ['pointNow' => $pointNow]);
+        return view('player.my_page', ['applyGifts' => $applyGifts, 'pointNow' => $pointNow]);
     }
 
     /**

@@ -1,9 +1,3 @@
-<?php  
-$gift_name = ['gift01', 'gift02', 'gift03'];
-$gift_num = [1, 2, 1];
-
-?>
-
 @extends('layouts.app')
 
 @section('title', 'my_page')
@@ -44,16 +38,16 @@ $gift_num = [1, 2, 1];
             <h1>< 応募している景品一覧 ></h1>
         </div>
 
-        @for( $i = 0; $i < count($gift_name); $i++ )
+        @foreach( $applyGifts as $ag )
         <div class="form-group row gift-box">
             <div class="col-md-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
             <div class="col-md-4 text-left">
-                景品名：{{ $gift_name[$i] }}<br/>
-                応募数：{{ $gift_num[$i] }}
+                景品名：{{ $ag->name }}<br/>
+                応募数：{{ $ag->pivot->quantity }}
             </div>
             <div class="col-md-1 text-right">×</div>
         </div>
-        @endfor
+        @endforeach
          
     </form>
 </div>

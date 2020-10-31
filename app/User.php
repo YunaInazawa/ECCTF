@@ -46,4 +46,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Course');
     }
 
+    // users - user_gifts - gift
+    public function gifts(){
+        return $this->belongsToMany('App\Gift', 'user_gifts')
+            ->withTimestamps()
+            ->withPivot(['quantity']);
+    }
+
 }

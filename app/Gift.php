@@ -14,4 +14,12 @@ class Gift extends Model
     {
         return $this->hasMany('App\UserGift');
     }
+
+    // users - user_gifts - gift
+    public function users(){
+        return $this->belongsToMany('App\User', 'user_gifts')
+            ->withTimestamps()
+            ->withPivot(['quantity']);
+    }
+    
 }
