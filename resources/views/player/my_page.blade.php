@@ -2,6 +2,10 @@
 
 @section('title', 'my_page')
 
+@section('js')
+<script src="{{ asset('js/my_page.js') }}" defer></script>
+@endsection
+
 @section('stylesheet')
 <link href="{{ asset('css/my_page.css') }}" rel="stylesheet">
 @endsection
@@ -41,14 +45,47 @@
         @foreach( $applyGifts as $ag )
         <div class="form-group row gift-box">
             <div class="col-md-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
-            <div class="col-md-4 text-left">
-                景品名：{{ $ag->name }}<br/>
-                応募数：{{ $ag->pivot->quantity }}
+            <div class="col-md-4 pt-2 text-left">
+                <h4>{{ $ag->name }}</h4><br/>
+                <p>応募数：{{ $ag->pivot->quantity }}</p>
             </div>
-            <div class="col-md-1 text-right">×</div>
+            <div class="col-md-1 pt-4 text-right">
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" onClick="clickDelete({{ $ag }}, {{ $ag->pivot->quantity }})">
+                <i class="far fa-times-circle fa-lg"></i>
+                </button>
+            </div>
         </div>
         @endforeach
-         
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-md-6 text-right pt-2">
+                                削除数 : 
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" id="delete_num" name="delete_num"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div id="hide"></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                        <button type="submit" class="btn btn-primary">削除する</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
 @endsection
