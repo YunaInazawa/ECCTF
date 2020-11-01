@@ -55,6 +55,7 @@
         </div>
 
         @foreach( $applyGifts as $ag )
+        @if( $ag->pivot->quantity != 0 )
         <div class="form-group row gift-box">
             <div class="col-md-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
             <div class="col-md-4 pt-2 text-left">
@@ -67,6 +68,7 @@
                 </button>
             </div>
         </div>
+        @endif
         @endforeach
 
         <!-- Modal -->

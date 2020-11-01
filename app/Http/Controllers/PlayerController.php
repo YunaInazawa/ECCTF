@@ -66,7 +66,12 @@ class PlayerController extends Controller
         $giftId = $request->delete_id;
         $deleteNum = $request->delete_num;
 
-        $msg = '「 ' . $giftId . ' 」<br />' . $deleteNum . ' P 応募を取り消しました';
+        $delGift = UserGift::where('user_id',  Auth::id())->where('gift_id', $giftId)->first();
+        $nowNum = $delGift->quantity;
+        $delGift->quantity = ($nowNum - $deleteNum);
+        $delGift->save();
+
+        $msg = '「 ' . $delGift->gift->name . ' 」<br />' . $deleteNum . ' P 応募を取り消しました';
 
         return redirect()->route('player.my_page')
             ->with('flash_message', $msg);
