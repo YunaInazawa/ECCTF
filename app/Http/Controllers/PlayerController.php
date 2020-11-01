@@ -8,6 +8,8 @@ use App\Gift;
 use App\UserGift;
 use App\Question;
 use App\Choice;
+use App\Place;
+use App\Answer;
 
 class PlayerController extends Controller
 {
@@ -101,15 +103,26 @@ class PlayerController extends Controller
      * 05_マイページ画面
      */
     public function my_page() {
+        $places = Place::where('card_id', Auth::user()->course->card->id)->orderBy('position_num')->get();
         $applyGifts = Auth::user()->gifts;
+        $placeDatas = array();
         $usePoint = 0;
+
+        foreach($places as $place){
+            if( Answer::where('user_id', Auth::id())->where('place_id', $place->id)->count() ){
+                $placeDatas[] = 'ok';
+            }else{
+                $placeDatas[] = $place->room_name;
+            }
+            
+        }
 
         foreach( $applyGifts as $ag ){
             $usePoint += $ag->pivot->quantity;
         }
         $pointNow = (Auth::user()->point) - $usePoint;
         
-        return view('player.my_page', ['applyGifts' => $applyGifts, 'pointNow' => $pointNow]);
+        return view('player.my_page', ['applyGifts' => $applyGifts, 'pointNow' => $pointNow, 'placeDatas' => $placeDatas]);
     }
 
     /**

@@ -14,4 +14,10 @@ class Course extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    // 親テーブル
+    public function card()
+    {
+        return $this->belongsTo('App\Card');
+    }
 }

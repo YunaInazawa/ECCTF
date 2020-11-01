@@ -27,8 +27,18 @@
             <h1>リーーーーチ☆</h1>
         </div>
 
-        <div class="form-group">
-            <p>ここに表</p>
+        <div class="form-group offset-2 col-md-8">
+            <table class="table table-bordered">
+                <tr>
+                    @for( $i = 0; $i < count($placeDatas); $i++ )
+                    <td>{{ $placeDatas[$i] }}</td>
+                        @if( $i % 5 == 4 && $i != 24 )
+                        </tr>
+                        <tr>
+                        @endif
+                    @endfor
+                </tr>
+            </table>
         </div>
 
         <div class="form-group">

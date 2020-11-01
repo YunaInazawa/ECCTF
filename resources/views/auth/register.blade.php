@@ -19,8 +19,8 @@ $course_list = ['IE3A', 'IE4A'];
                     <div class="col-md-6">
                         <select id="course" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
                             <option value="">選択してください</option>
-                            @foreach( $course_list as $list )
-                            <option value="{{ $list }}">{{ $list }}</option>
+                            @foreach( $courseDatas as $data )
+                            <option value="{{ $data->name }}">{{ $data->name }}</option>
                             @endforeach
                         </select>
 

@@ -14,4 +14,8 @@ class Card extends Model
     {
         return $this->hasMany('App\Place');
     }
+    public function courses()
+    {
+        return $this->hasMany('App\Course');
+    }
 }
