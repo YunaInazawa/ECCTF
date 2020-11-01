@@ -10,6 +10,7 @@ use App\Question;
 use App\Choice;
 use App\Place;
 use App\Answer;
+use App\PlaceQuestion;
 
 class PlayerController extends Controller
 {
@@ -28,7 +29,8 @@ class PlayerController extends Controller
      */
     public function question( $code ) {
         $placeData = Place::where('position_code', $code)->first();
-        $questionData = Question::where('genre_id', $placeData->genre_id)->where('level_id', $placeData->level_id)->inRandomOrder()->first();
+        $info = PlaceQuestion::where('place_id', $placeData->id)->where('card_id', Auth::user()->course->card_id)->first();
+        $questionData = Question::where('genre_id', $info->genre_id)->where('level_id', $info->level_id)->inRandomOrder()->first();
 
         return view('player.question', ['questionData' => $questionData, 'question_type' => $questionData->type->name]);
     }
@@ -79,7 +81,7 @@ class PlayerController extends Controller
         if( $result ) {
             return redirect()->route('player.commentary', $questionId);
         } else {
-            return redirect()->route('player.question')
+            return redirect()->back()
                 ->with('flash_message', '不正解です');
         }
         
@@ -104,7 +106,7 @@ class PlayerController extends Controller
      * 05_マイページ画面
      */
     public function my_page() {
-        $places = Place::where('card_id', Auth::user()->course->card->id)->orderBy('position_num')->get();
+        $places = Place::all();
         $applyGifts = Auth::user()->gifts;
         $placeDatas = array();
         $usePoint = 0;
