@@ -28,33 +28,12 @@ class PlacesTableSeeder extends Seeder
             '1301', '1302', '1303', '2301', '2302', '2303', '3201', '3202', '3301', 
             '1301', '1302', '1303', '2301', '2302', '2303', '3201', '3202', '3301'
         ];
-        $cards = 
-        [
-            'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 'IT下級生用', 
-            'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用', 'GAME上級生用'
-        ];
-        $levels = 
-        [
-            '上級', '下級', '上級', '共通', 'TEST', '下級', '共通', '上級', '下級', 
-            '上級', '下級', '上級', '下級', 'TEST', '上級', '共通', '上級', '下級'
-        ];
-        $genres = 
-        [
-            '勉学/プログラミング', '勉学/PC基礎', '勉学/国家試験', '学校/全体', 'TEST', '勉学/PC基礎', '学校/先生', '勉学/国家試験', '勉学/プログラミング', 
-            '勉学/プログラミング', '勉学/国家試験', '勉学/国家試験', '勉学/プログラミング', 'TEST', '勉学/PC基礎', '学校/先生', '勉学/国家試験', '勉学/プログラミング'
-        ]; 
 
         for( $i = 0; $i < count($nums); $i++ ){
-            $card_id = DB::table('cards')->where('name', $cards[$i])->first()->id;
-            $level_id = DB::table('levels')->where('name', $levels[$i])->first()->id;
-            $genre_id = DB::table('genres')->where('name', $genres[$i])->first()->id;
             DB::table('places')->insert([
                 'position_num' => $nums[$i],
                 'position_code' => $codes[$i], 
                 'room_name' => $names[$i],
-                'card_id' => $card_id,
-                'level_id' => $level_id,
-                'genre_id' => $genre_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
             ]);

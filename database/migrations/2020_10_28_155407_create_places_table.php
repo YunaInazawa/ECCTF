@@ -19,18 +19,6 @@ class CreatePlacesTable extends Migration
             $table->string('position_code')->unique();
             $table->string('room_name');
             $table->string('image_path')->nullable();
-            $table->foreignId('card_id')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('genre_id')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('level_id')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
