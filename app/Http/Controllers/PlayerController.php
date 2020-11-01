@@ -74,7 +74,7 @@ class PlayerController extends Controller
         }
 
         if( $result ) {
-            return redirect()->route('player.commentary');
+            return redirect()->route('player.commentary', $questionId);
         } else {
             return redirect()->route('player.question')
                 ->with('flash_message', '不正解です');
@@ -85,9 +85,16 @@ class PlayerController extends Controller
     /**
      * 04_解説画面
      */
-    public function commentary() {
+    public function commentary( $id ) {
+        $questionData = Question::find($id);
+        $correctDatas = Choice::where('question_id', $id)->where('is_correct', true)->get();
+        $correct = '';
+
+        foreach( $correctDatas as $data ){
+            $correct .= $data->text . '<br />';
+        }
         
-        return view('player.commentary');
+        return view('player.commentary', ['questionData' => $questionData, 'correct' => $correct]);
     }
 
     /**

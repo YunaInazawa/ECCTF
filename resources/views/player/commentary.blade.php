@@ -5,12 +5,16 @@
 @section('content')
 <div class="col-md-12">
     <div class="card text-center">
-        <div class="card-header"><h1>正解</h1></div>
+        <div class="card-header"><h2>正解です</h2></div>
 
         <div class="card-body">
             <form action="{{ route('player.my_page') }}">
 
-                <h3 class="card-text">COMMENTARY_TEXT</h3>
+                <h4 class="card-text">{{ $questionData->text }}</h4>
+                <hr>
+                <p>< 正解 ><br />{!! nl2br($correct) !!}</p>
+                <hr>
+                <p>{!! nl2br($questionData->commentary) !!}</p>
 
                 <button type="submit" class="btn btn-primary">my_page</button>
             </form>

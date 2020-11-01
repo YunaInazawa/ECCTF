@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/question', 'PlayerController@question')->name('player.question');
 Route::post('/check', 'PlayerController@check')->name('player.check');
-Route::get('/commentary', 'PlayerController@commentary')->name('player.commentary');
+Route::get('/commentary/{id}', 'PlayerController@commentary')->name('player.commentary');
 Route::get('/my_page', 'PlayerController@my_page')->name('player.my_page');
 Route::post('/delete', 'PlayerController@delete')->name('player.delete');
 Route::get('/challenge', 'PlayerController@challenge')->name('player.challenge');
