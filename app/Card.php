@@ -10,9 +10,9 @@ class Card extends Model
     use SoftDeletes;
 
     // 子テーブル
-    public function places()
+    public function place_questions()
     {
-        return $this->hasMany('App\Place');
+        return $this->hasMany('App\PlaceQuestion');
     }
     public function courses()
     {

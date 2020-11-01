@@ -14,8 +14,8 @@ class Level extends Model
     {
         return $this->hasMany('App\Question');
     }
-    public function places()
+    public function place_questions()
     {
-        return $this->hasMany('App\Place');
+        return $this->hasMany('App\PlaceQuestion');
     }
 }

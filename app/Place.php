@@ -14,17 +14,8 @@ class Place extends Model
     {
         return $this->hasMany('App\Answer');
     }
-    // 親テーブル
-    public function card()
+    public function place_questions()
     {
-        return $this->belongsTo('App\Card');
-    }
-    public function genre()
-    {
-        return $this->belongsTo('App\Genre');
-    }
-    public function level()
-    {
-        return $this->belongsTo('App\Level');
+        return $this->hasMany('App\PlaceQuestion');
     }
 }
