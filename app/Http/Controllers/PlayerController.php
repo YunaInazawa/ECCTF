@@ -59,6 +59,20 @@ class PlayerController extends Controller
     }
 
     /**
+     * 応募取消
+     */
+    public function delete( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $giftId = $request->delete_id;
+        $deleteNum = $request->delete_num;
+
+        $msg = '「 ' . $giftId . ' 」<br />' . $deleteNum . ' P 応募を取り消しました';
+
+        return redirect()->route('player.my_page')
+            ->with('flash_message', $msg);
+    }
+
+    /**
      * 06_抽選申込画面
      */
     public function challenge() {
@@ -95,7 +109,7 @@ class PlayerController extends Controller
             $applyData->save();
         }
 
-        $msg = $applyData->gift->name . ' に ' . $applyNum . 'P 応募しました';
+        $msg = '「 ' .  $applyData->gift->name . ' 」<br />' . $applyNum . 'P 応募しました';
 
         return redirect()->route('player.challenge')
             ->with('flash_message', $msg);

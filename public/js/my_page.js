@@ -1,7 +1,9 @@
 function clickDelete( giftData, applyNum ) {
     var hide = '<input type="hidden" name="delete_id" value="' + giftData['id'] + '">';
+    var giftImage = '<img class="fit-image" src="images/sampleQR.png">';
 
-    document.getElementById('hide').innerHTML = 
+    document.getElementById('hide').innerHTML = hide;
+    document.getElementById('modal-image').innerHTML = giftImage;
     document.getElementById('modal-title').innerHTML = giftData['name'];
 
     var select = document.getElementById('delete_num');

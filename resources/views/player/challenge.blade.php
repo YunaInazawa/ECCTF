@@ -22,7 +22,8 @@
                     <!-- フラッシュメッセージ -->
                     @if (session('flash_message'))
                         <div class="flash_message">
-                            {{ session('flash_message') }}
+                            {!! nl2br(session('flash_message')) !!}
+                            <hr>
                         </div>
                     @endif
                 </div>
