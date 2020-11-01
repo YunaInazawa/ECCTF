@@ -5,7 +5,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card text-center">
-        <div class="card-header"><h1>QUESTION_TITLE</h1></div>
+        <div class="card-header"><h1>正解</h1></div>
 
         <div class="card-body">
             <form action="{{ route('player.my_page') }}">

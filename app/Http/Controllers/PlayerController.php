@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Gift;
 use App\UserGift;
+use App\Question;
+use App\Choice;
 
 class PlayerController extends Controller
 {
@@ -23,16 +25,61 @@ class PlayerController extends Controller
      * 03_問題画面
      */
     public function question() {
+        $questionData = Question::find(5);
 
-        return view('player.question');
+        return view('player.question', ['questionData' => $questionData, 'question_type' => $questionData->type->name]);
     }
 
     /**
      * 正解 / 不正解 判定
      */
-    public function check() {
+    public function check( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $questionId = $request->question_id;
 
-        return redirect()->route('player.commentary');
+        $questionData = Question::find($questionId);
+        if( $questionData->type->name == '択一クイズ' || $questionData->type->name == '二択クイズ' ){
+            $choiceId = $request->answerRadio;
+            $answerData = Choice::find($choiceId);
+
+            // 正解 or 不正解 判定
+            if( $answerData->is_correct ){
+                $result = true;
+            }else{
+                $result = false;
+            }
+
+        } elseif( $questionData->type->name == '多答クイズ' ) {
+            $answer = $request->answerChecks;
+            $choiceData = Choice::where('question_id', $questionId)->get();
+
+            // 正解 or 不正解 判定
+            if( $this->checkAnswer( $choiceData, $answer ) ){
+                $result = true;
+            }else{
+                $result = false;
+            }    
+
+        } else {
+            $answerData = $request->answerText;
+            $choiceData = Choice::where('question_id', $questionId)->first();
+
+            // 正解 or 不正解 判定
+            if( $choiceData->text == $answerData ){
+                $result = true;
+            }else{
+                $result = false;
+            }
+
+        }
+
+        if( $result ) {
+            return redirect()->route('player.commentary');
+        } else {
+            return redirect()->route('player.question')
+                ->with('flash_message', '不正解です');
+        }
+        
     }
 
     /**
@@ -119,4 +166,22 @@ class PlayerController extends Controller
         return redirect()->route('player.challenge')
             ->with('flash_message', $msg);
     }
+
+    /**
+     * 多答クイズ : 正解 / 不正解 チェック
+     */
+    function checkAnswer( $choiceData, $answer ) {
+        if ( is_null($answer) ) return false;
+
+        foreach( $choiceData as $data ){
+            if( in_array($data->id, $answer) ) {
+                if( !$data->is_correct ) return false;
+            } else {
+                if( $data->is_correct ) return false;
+            }
+            
+        }
+        return true;
+    }
+
 }
