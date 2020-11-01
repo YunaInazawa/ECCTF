@@ -1,7 +1,3 @@
-<?php 
-$question_answer = ['選択肢1', '選択肢2', '選択肢3'];
-?>
-
 @extends('layouts.app')
 
 @section('title', 'question')

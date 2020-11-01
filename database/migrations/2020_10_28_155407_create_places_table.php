@@ -16,7 +16,7 @@ class CreatePlacesTable extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
             $table->integer('position_num');
-            $table->string('position_code');
+            $table->string('position_code')->unique();
             $table->string('room_name');
             $table->string('image_path')->nullable();
             $table->foreignId('card_id')

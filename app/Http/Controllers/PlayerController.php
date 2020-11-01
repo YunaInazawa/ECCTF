@@ -26,8 +26,9 @@ class PlayerController extends Controller
     /**
      * 03_問題画面
      */
-    public function question() {
-        $questionData = Question::find(5);
+    public function question( $code ) {
+        $placeData = Place::where('position_code', $code)->first();
+        $questionData = Question::where('genre_id', $placeData->genre_id)->where('level_id', $placeData->level_id)->inRandomOrder()->first();
 
         return view('player.question', ['questionData' => $questionData, 'question_type' => $questionData->type->name]);
     }
