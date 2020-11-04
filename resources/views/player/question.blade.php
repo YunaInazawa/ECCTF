@@ -55,6 +55,7 @@
                 </div>
 
                 <input type="hidden" name="question_id" value="{{ $questionData->id }}">
+                <input type="hidden" name="code" value="{{ $code }}">
                 <button type="submit" class="btn btn-primary">
                     {{ __('回答') }}
                 </button>

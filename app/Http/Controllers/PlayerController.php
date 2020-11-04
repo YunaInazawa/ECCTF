@@ -29,10 +29,20 @@ class PlayerController extends Controller
      */
     public function question( $code ) {
         $placeData = Place::where('position_code', $code)->first();
+
+        if( Answer::where('user_id', Auth::id())->where('place_id', $placeData->id)->count() ){
+            return redirect()->route('player.my_page');
+        }
+
         $info = PlaceQuestion::where('place_id', $placeData->id)->where('card_id', Auth::user()->course->card_id)->first();
         $questionData = Question::where('genre_id', $info->genre_id)->where('level_id', $info->level_id)->inRandomOrder()->first();
 
-        return view('player.question', ['questionData' => $questionData, 'question_type' => $questionData->type->name]);
+        while( Answer::where('user_id', Auth::id())->where('question_id', $questionData->id)->count() ){
+            $questionData = Question::where('genre_id', $info->genre_id)->where('level_id', $info->level_id)->inRandomOrder()->first();
+
+        }
+
+        return view('player.question', ['questionData' => $questionData, 'question_type' => $questionData->type->name, 'code' => $code]);
     }
 
     /**
@@ -41,6 +51,7 @@ class PlayerController extends Controller
     public function check( Request $request ) {
         $request -> session() -> regenerateToken();
         $questionId = $request->question_id;
+        $code = $request->code;
 
         $questionData = Question::find($questionId);
         if( $questionData->type->name == '択一クイズ' || $questionData->type->name == '二択クイズ' ){
@@ -79,6 +90,12 @@ class PlayerController extends Controller
         }
 
         if( $result ) {
+            $addAnswer = new Answer;
+            $addAnswer->user_id = Auth::id();
+            $addAnswer->place_id = Place::where('position_code', $code)->first()->id;
+            $addAnswer->question_id = $questionId;
+            $addAnswer->save();
+
             return redirect()->route('player.commentary', $questionId);
         } else {
             return redirect()->back()
