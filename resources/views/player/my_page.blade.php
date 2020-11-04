@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_header')
 
 @section('title', 'my_page')
 
@@ -27,25 +27,39 @@
             <h1>リーーーーチ☆</h1>
         </div>
 
-        <div class="form-group offset-2 col-md-8">
-            <table class="table table-bordered">
-                <tr>
-                    @for( $i = 0; $i < count($placeDatas); $i++ )
-                    <td>{{ $placeDatas[$i] }}</td>
-                        @if( $i % 5 == 4 && $i != 24 )
-                        </tr>
+        <div class="form-group col-md-8">
+            <div class="bingo">
+                <table class="table table-bordered">
+                    <tr>
+                        @for( $i = 0; $i < 25; $i++ )
+                            <td>33{{ $i }}</td>
+                            @if( $i % 5 == 4 && $i != 24 )
+                            </tr>
+                            <tr>
+                            @endif
+                        @endfor
+                    </tr>
+                    <!--
                         <tr>
-                        @endif
-                    @endfor
-                </tr>
-            </table>
+                        @for( $i = 0; $i < count($placeDatas); $i++ )
+                            <td>{{ $placeDatas[$i] }}</td>
+                            @if( $i % 5 == 4 && $i != 24 )
+                            </tr>
+                            <tr>
+                            @endif
+                        @endfor
+                    </tr>
+                    -->
+                </table>
+                <img class="title_ic" src="images/momizi_big.png">
+            </div>
         </div>
 
         <div class="form-group">
             <p>所持ポイント：{{ $pointNow }}</p>
         </div>
 
-        <button type="submit" class="btn btn-primary">challenge</button>
+        <button type="submit" class="btn btn-primary">応募</button>
 
     </form>
 
@@ -61,21 +75,19 @@
         @csrf
         
         <div class="form-group">
-            <h1>< 応募している景品一覧 ></h1>
+            <h2>< 応募している景品一覧 ></h2>
         </div>
 
         @foreach( $applyGifts as $ag )
         @if( $ag->pivot->quantity != 0 )
         <div class="form-group row gift-box">
-            <div class="col-md-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
-            <div class="col-md-4 pt-2 text-left">
+            <div class="col-md-4 col-sm-4 text-right"><img src="images/sampleQR.png" class="img-responsive fit-image"></div>
+            <div class="col-md-4 col-sm-4 pt-2 text-left">
+                <button type="button" class="btn btn_deleate" data-toggle="modal" data-target="#exampleModalCenter" onClick="clickDelete({{ $ag }}, {{ $ag->pivot->quantity }})">
+                    <i class="far fa-times-circle fa-lg"></i>
+                    </button>
                 <h4>{{ $ag->name }}</h4><br/>
                 <p>応募数：{{ $ag->pivot->quantity }}</p>
-            </div>
-            <div class="col-md-1 pt-4 text-right">
-                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" onClick="clickDelete({{ $ag }}, {{ $ag->pivot->quantity }})">
-                <i class="far fa-times-circle fa-lg"></i>
-                </button>
             </div>
         </div>
         @endif
