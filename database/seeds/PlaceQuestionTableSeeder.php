@@ -13,10 +13,10 @@ class PlaceQuestionTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $placeCodes = 
+        $placeNums = 
         [
-            'A000000000', 'B000000000', 'C000000000', 'D000000000', 'E000000000', 'F000000000', 'G000000000', 'H000000000', 'I000000000', 
-            'A000000000', 'B000000000', 'C000000000', 'D000000000', 'E000000000', 'F000000000', 'G000000000', 'H000000000', 'I000000000'
+            0, 1, 2, 3, 4, 5, 6, 7, 8,  
+            0, 1, 2, 3, 4, 5, 6, 7, 8
         ];
         $cards = 
         [
@@ -34,8 +34,8 @@ class PlaceQuestionTableSeeder extends Seeder
             '勉学/プログラミング', '勉学/国家試験', '勉学/国家試験', '勉学/プログラミング', 'TEST', '勉学/PC基礎', '学校/先生', '勉学/国家試験', '勉学/プログラミング'
         ]; 
 
-        for( $i = 0; $i < count($placeCodes); $i++ ){
-            $place_id = DB::table('places')->where('position_code', $placeCodes[$i])->first()->id;
+        for( $i = 0; $i < count($placeNums); $i++ ){
+            $place_id = DB::table('places')->where('position_num', $placeNums[$i])->first()->id;
             $card_id = DB::table('cards')->where('name', $cards[$i])->first()->id;
             $level_id = DB::table('levels')->where('name', $levels[$i])->first()->id;
             $genre_id = DB::table('genres')->where('name', $genres[$i])->first()->id;

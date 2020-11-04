@@ -46,7 +46,7 @@ class PlayerController extends Controller
     }
 
     /**
-     * 正解 / 不正解 判定
+     * 正誤判定
      */
     public function check( Request $request ) {
         $request -> session() -> regenerateToken();
