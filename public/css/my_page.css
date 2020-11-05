@@ -8,3 +8,52 @@
     height: 150px;
 
 }
+
+
+.col-sm-4{
+    width: auto;
+}
+
+.btn_deleate, .btn_deleate:hover, .btn_deleate:active, .btn_deleate:focus{   
+    background-color: transparent !important;
+    color: var(--momi) !important;
+    border: transparent;
+    border-radius: 42px;
+    width: 33px;
+    height: 33px;
+    padding: 2px;
+    font-size: 20px;
+    position: absolute;
+    left: 180px;
+    top: -10px;
+  }
+
+  .bingo{
+    padding: 20px;
+    margin: 2em 0;
+    background: var(--koharu);
+    box-shadow: 0px 0px 0px 10px var(--koharu);
+    border: dashed 2px white;
+  }
+  
+  .bingo table{
+    margin: 0;
+  }
+  
+  .bingo table tr td{
+    height: 60px;
+    padding: 0;
+    
+    border: solid 2px var(--hatuyuki);
+  }
+  .bingo table tr{
+    width: 10px
+  }
+  .bingo img{
+    position: absolute;
+    transform: rotateY( 180deg );
+    top: 317px;
+    width: 70px;
+    left: 335px;
+    height: 65px;
+  }

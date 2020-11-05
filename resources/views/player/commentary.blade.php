@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_header')
 
 @section('title', 'commentary')
 
@@ -16,7 +16,7 @@
                 <hr>
                 <p>{!! nl2br($questionData->commentary) !!}</p>
 
-                <button type="submit" class="btn btn-primary">my_page</button>
+                <button type="submit" class="btn btn-primary">マイページ</button>
             </form>
         </div>
     </div>

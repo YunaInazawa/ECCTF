@@ -1,0 +1,267 @@
+/*----------------------------------
+ テンプレートcss
+
+ 1.カラーコード表
+ 2.共通ヘッダーの設定
+ 3.背景設定
+  3.1 一色背景
+  3.2 背景に飛び散る紅葉
+ 4.カード設定
+ 5.文字設定
+ 6.ボタンの調整
+ 7.アニメーションDROP
+ ---------------------------------*/
+
+/*----------------------------------
+ 1.カラーコード表
+ ---------------------------------*/
+:root{
+  --momizi:    #E2451E;
+  --kaede:     #E77433;
+  --momi:      #BD3528;
+  --koharu:    #F4A358;
+  --saka:      #BD956E;
+  --hatuyuki:  #F8F0EC;
+  --hinoki:    #C6AE8D;
+  --huyukusa:  #9D8C73;
+  --yamanemuru:#5D4C35;
+  
+  --ityo:      #FDED52;
+  --zyuzitu:   #FADC34;
+  --honen:     #765E36;
+
+}
+
+
+
+/*----------------------------------
+ 2.共通ヘッダーの設定
+ ---------------------------------*/
+.navbar{
+    background-color: rgba(244, 163, 88, 0.6) !important;
+}
+.menu_ic{
+    font-size: 30px;
+    color: var(--yamanemuru);
+    margin-left: 10px;
+}
+.menu_ic:active,.menu_ic:hover{
+  color: var(--hatuyuki);
+  border: solid 1px var(--yamanemuru);
+  text-decoration: none;
+}
+
+
+
+/*----------------------------------
+ 3.背景設定
+ ---------------------------------*/
+ 
+/*
+  3.1 一色背景
+ ---------------------------------*/
+body{
+  background-color: rgb(198, 174, 141,0.5);
+}
+
+/*
+  3.2 背景に飛び散る紅葉
+ ---------------------------------*/
+.momizi5,.momizi8{
+  opacity: 0;
+  animation-name: Drop;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url(../images/momizi_1.png) no-repeat;
+  overflow: hidden;
+}
+.momizi_drop .momizi3,.momizi6{
+  opacity: 0;
+  animation-name: Drop;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url(../images/momizi_2.png) no-repeat;
+  overflow: hidden;
+}
+.momizi1{
+  opacity: 0;
+  animation-name: Drop;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url(../images/momizi_3.png) no-repeat;
+  overflow: hidden;
+}
+.momizi3,.momizi5,.momizi6,.momizi8,.momizi1{
+  background-size: 30px 27px !important;
+}
+.momizi1 {
+  left: 50px;
+  animation-duration: 12s;
+}
+.momizi2 {
+  left: 80px;
+  animation-duration: 8s;
+  animation-delay: 10s;
+}
+.momizi3 {
+  left: 120px;
+  animation-duration: 12s;
+  animation-delay: 8s;
+}
+.momizi4 {
+  left: 160px;
+  animation-duration: 10s;
+  animation-delay: 16s;
+}
+.momizi5 {
+  left: 200px;
+  animation-duration: 8s;
+  animation-delay: 2s;
+}
+.momizi6 {
+  left: 240px;
+  animation-duration: 12s;
+  animation-delay: 13s;
+}
+.momizi7 {
+  left: 260px;
+  animation-duration: 10s;
+  animation-delay: 8s;
+}
+.momizi8 {
+  left: 320px;
+  animation-duration: 8s;
+  animation-delay: 14s;
+}/*
+.momizi9 {
+  left: 380px;
+  animation-duration: 10s;
+  animation-delay: 2s;
+}
+.momizi10 {
+  left: 540px;
+  animation-duration: 12s;
+  animation-delay: 6s;
+}*/
+
+
+
+/*----------------------------------
+ 4.カード設定
+ ---------------------------------*/
+.card{
+  background-color: rgb(253, 237, 82,0.5);
+}
+.card_head{
+  position: relative;
+  top: -20px;
+  left: -8px;
+  height: 15px;
+}
+.title{
+  font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
+  font-size: 30px;
+  color: var(--momizi);
+  font-weight: bold;
+  position: relative;
+  left: -33px;
+  top: 5px;
+}
+.title span{
+  color: var(--yamanemuru);
+  font-size: 40px;
+}
+.title_ic{
+  position: relative;
+  top: -10px;
+  left: -5px;
+  width: 60px;
+  height: 55px;
+}
+.input_label{
+  color: var(--momizi);
+  font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
+}
+.input_item{
+  margin-bottom: 0;
+}
+
+
+
+/*----------------------------------
+ 5.文字設定
+ ---------------------------------*/
+h2, h4, p ,h1{
+  font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
+  color: var(--yamanemuru);
+}
+
+
+
+/*----------------------------------
+ 6.ボタンの調整
+ ---------------------------------*/
+ .btn{
+  margin-top: 15px;
+  background-color: var(--momizi) !important;
+  color: var(--hatuyuki) !important;
+  border: solid 1px var(--momi);
+  padding: 4px 12px;
+}
+.btn:hover, .btn:active, .btn:focus{
+  /*-- カーソルを合わせた時 --*/
+  background-color: var(--kaede) !important;
+  color: var(--yamanemuru) !important;
+  /* 影を入れる */
+  box-shadow: 0 0 0 0.2rem var(--hatuyuki) !important;
+  outline: none;
+}
+.btn:active{
+  /*-- クリックしている時 --*/
+  background-color: var(--momizi) !important;
+  /* 影を入れる */
+  box-shadow: 0 0 0 0.2rem var(--hatuyuki) !important;
+}
+.input_btn{
+  text-align: right;
+}
+
+
+
+/*----------------------------------
+ 7.アニメーションDROP
+ ---------------------------------*/
+@keyframes Drop{
+  0%{
+    transform: translate(0,0);
+    opacity: 0;
+}
+25%{
+    transform: translate(5px, 150px);
+    opacity: 0.5;
+}
+50%{
+  transform: translate(40px, 300px);
+  opacity: 1;
+}
+75%{
+    transform: translate(10px,450px);
+    opacity: 0.5;
+}
+100%{
+  transform: translate(45px,550px);
+  opacity: 0;
+}
+}
