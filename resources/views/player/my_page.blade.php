@@ -30,7 +30,7 @@
         <div class="form-group col-md-8">
             <div class="bingo">
                 <table class="table table-bordered">
-                    <tr>
+                    <!-- <tr>
                         @for( $i = 0; $i < 25; $i++ )
                             <td>33{{ $i }}</td>
                             @if( $i % 5 == 4 && $i != 24 )
@@ -38,8 +38,8 @@
                             <tr>
                             @endif
                         @endfor
-                    </tr>
-                    <!--
+                    </tr> -->
+                    
                         <tr>
                         @for( $i = 0; $i < count($placeDatas); $i++ )
                             <td>{{ $placeDatas[$i] }}</td>
@@ -49,7 +49,7 @@
                             @endif
                         @endfor
                     </tr>
-                    -->
+                   
                 </table>
                 <img class="title_ic" src="images/momizi_big.png">
             </div>
