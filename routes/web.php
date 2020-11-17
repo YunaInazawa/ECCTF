@@ -27,3 +27,5 @@ Route::get('/my_page', 'PlayerController@my_page')->name('player.my_page');
 Route::post('/delete', 'PlayerController@delete')->name('player.delete');
 Route::get('/challenge', 'PlayerController@challenge')->name('player.challenge');
 Route::post('/apply', 'PlayerController@apply')->name('player.apply');
+
+Route::get('/management', 'AdminController@index')->name('admin.management');
