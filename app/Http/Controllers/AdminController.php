@@ -56,4 +56,13 @@ class AdminController extends Controller
         
         return view('admin.gift_details', ['giftData' => $giftData]);
     }
+
+    /**
+     * 09_詳細画面（ユーザ）
+     */
+    public function user_details( $id ) {
+        $userData = User::find($id);
+        
+        return view('admin.user_details', ['userData' => $userData]);
+    }
 }

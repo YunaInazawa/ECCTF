@@ -79,7 +79,7 @@
                             @foreach( $usersData as $user )
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
+                                <td><a href="{{ route('admin.user_details', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->point }}</td>
                             </tr>
                             @endforeach
