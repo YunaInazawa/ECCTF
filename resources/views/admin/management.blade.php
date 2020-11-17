@@ -56,7 +56,7 @@
                             @foreach( $giftsData as $gift )
                             <tr>
                                 <th scope="row">{{ $gift->image_path }}</th>
-                                <td>{{ $gift->name }}</td>
+                                <td><a href="{{ route('admin.gift_details', $gift->id) }}">{{ $gift->name }}</a></td>
                                 <td>quantity</td>
                             </tr>
                             @endforeach

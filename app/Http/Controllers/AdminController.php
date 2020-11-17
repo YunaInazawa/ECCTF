@@ -47,4 +47,13 @@ class AdminController extends Controller
         
         return view('admin.question_details', ['questionData' => $questionData, 'choicesData' => $choicesData, 'correct' => $correct]);
     }
+
+    /**
+     * 09_詳細画面（景品）
+     */
+    public function gift_details( $id ) {
+        $giftData = Gift::find($id);
+        
+        return view('admin.gift_details', ['giftData' => $giftData]);
+    }
 }

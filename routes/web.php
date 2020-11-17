@@ -30,3 +30,4 @@ Route::post('/apply', 'PlayerController@apply')->name('player.apply');
 
 Route::get('/management', 'AdminController@index')->name('admin.management');
 Route::get('/question_details/{id}', 'AdminController@question_details')->name('admin.question_details');
+Route::get('gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
