@@ -29,3 +29,4 @@ Route::get('/challenge', 'PlayerController@challenge')->name('player.challenge')
 Route::post('/apply', 'PlayerController@apply')->name('player.apply');
 
 Route::get('/management', 'AdminController@index')->name('admin.management');
+Route::get('/question_details/{id}', 'AdminController@question_details')->name('admin.question_details');

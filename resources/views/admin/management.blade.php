@@ -33,7 +33,7 @@
                             @foreach( $questionsData as $question )
                             <tr>
                                 <th scope="row">{{ $question->id }}</th>
-                                <td>{{ $question->text }}</td>
+                                <td><a href="{{ route('admin.question_details', $question->id) }}">{{ $question->text }}</a></td>
                                 <td>Answer</td>
                             </tr>
                             @endforeach

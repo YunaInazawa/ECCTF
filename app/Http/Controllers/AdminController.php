@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Question;
 use App\Gift;
+use App\Choice;
 
 class AdminController extends Controller
 {
@@ -28,5 +29,22 @@ class AdminController extends Controller
         $GiftsData = Gift::all();
 
         return view('admin.management', ['usersData' => $usersData, 'questionsData' => $questionsData, 'giftsData' => $GiftsData]);
+    }
+
+    /**
+     * 09_詳細画面（問題）
+     */
+    public function question_details( $id ) {
+        $questionData = Question::find($id);
+        $choicesData = Choice::where('question_id', $id)->get();
+        $correct = '';
+
+        foreach( $choicesData as $choice ){
+            if( $choice->is_correct == 1 ){
+                $correct .= $choice->text . '<br />';
+            }
+        }
+        
+        return view('admin.question_details', ['questionData' => $questionData, 'choicesData' => $choicesData, 'correct' => $correct]);
     }
 }
