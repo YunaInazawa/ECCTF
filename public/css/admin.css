@@ -7,3 +7,8 @@ tbody tr.clickable:hover td {
     background: #ffbd43;
     cursor: pointer;
 }
+
+.lie-link:hover {
+    color: blue;
+    
+}

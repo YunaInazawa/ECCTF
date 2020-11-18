@@ -2,6 +2,14 @@
 
 @section('title', 'question_create')
 
+@section('js')
+<script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
+@section('stylesheet')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="col-md-12">
         <div class="card">
@@ -37,7 +45,7 @@
                             <label for="level" class="col-md-8 col-form-label input_label">{{ __('レベル') }}</label>
 
                             <div class="col-md-8">
-                                <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" required autocomplete="level" autofocus>
+                                <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" required autocomplete="level">
                                     <option value="">選択してください</option>
                                     @foreach( $levels as $level )
                                     <option value="{{ $level->name }}">{{ $level->name }}</option>
@@ -73,7 +81,7 @@
                         <label for="type" class="col-md-4 offset-md-2 col-form-label input_label">{{ __('回答タイプ') }}</label>
 
                         <div class="col-md-4 offset-md-2">
-                            <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autocomplete="type" autofocus>
+                            <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autocomplete="type" onChange="changeType()">
                                 <option value="">選択してください</option>
                                 @foreach( $types as $type )
                                 <option value="{{ $type->name }}">{{ $type->name }}</option>
@@ -90,12 +98,12 @@
 
                     <!-- 回答（タイプによって変更） -->
                     <div class="form-group">
-                        <label for="password" class="col-md-8 offset-md-2 col-form-label input_label">{{ __('回答') }}</label>
+                        <label for="answer" class="col-md-8 offset-md-2 col-form-label input_label">{{ __('回答') }}</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div id="answerArea">「回答タイプ」を選択してください</div>
 
-                            @error('password')
+                            @error('answer')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -108,7 +116,7 @@
                         <label for="commentary" class="col-md-8 offset-md-2 col-form-label input_label">{{ __('解説') }}</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <textarea id="commentary" class="form-control" name="commentary" required autocomplate="commentary" autofocus>{{ old('commentary') }}</textarea>
+                            <textarea id="commentary" class="form-control" name="commentary" required autocomplate="commentary">{{ old('commentary') }}</textarea>
                         </div>
                     </div>
 
