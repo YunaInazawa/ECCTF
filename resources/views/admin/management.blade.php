@@ -40,7 +40,11 @@
                             <tr data-href="{{ route('admin.question_details', $question->id) }}">
                                 <th scope="row">{{ $question->id }}</th>
                                 <td>{{ $question->text }}</td>
-                                <td>Answer</td>
+                                <td>
+                                    @foreach( $corrects[$question->id] as $data )
+                                    {{ $data->text }}<br />
+                                    @endforeach
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -63,7 +67,9 @@
                             <tr data-href="{{ route('admin.gift_details', $gift->id) }}"">
                                 <th scope="row">{{ $gift->image_path }}</th>
                                 <td>{{ $gift->name }}</td>
-                                <td>quantity</td>
+                                <td>
+                                    {{ $quantitys[$gift->id] == 0 ? '-' : $quantitys[$gift->id] . ' P' }}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

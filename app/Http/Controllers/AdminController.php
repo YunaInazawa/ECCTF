@@ -7,6 +7,7 @@ use App\User;
 use App\Question;
 use App\Gift;
 use App\Choice;
+use App\UserGift;
 
 class AdminController extends Controller
 {
@@ -26,9 +27,24 @@ class AdminController extends Controller
     public function index() {
         $usersData = User::where('is_admin', 0)->get();
         $questionsData = Question::all();
-        $GiftsData = Gift::all();
+        $giftsData = Gift::all();
+        $corrects = array();
+        $quantitys = array();
 
-        return view('admin.management', ['usersData' => $usersData, 'questionsData' => $questionsData, 'giftsData' => $GiftsData]);
+        foreach( $questionsData as $question ){
+            $corrects[$question->id] = Choice::where('question_id', $question->id)->where('is_correct', true)->get();
+        }
+
+        foreach( $giftsData as $gift ){
+            $sum = 0;
+            foreach( UserGift::where('gift_id', $gift->id)->get() as $data ){
+                $sum += $data->quantity;
+            }
+
+            $quantitys[$gift->id] = $sum;
+        }
+
+        return view('admin.management', ['usersData' => $usersData, 'questionsData' => $questionsData, 'giftsData' => $giftsData, 'corrects' => $corrects, 'quantitys' => $quantitys]);
     }
 
     /**
