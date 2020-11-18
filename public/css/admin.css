@@ -1,0 +1,9 @@
+thead th {
+    background: #fa940e;
+    color: #fff;
+}
+
+tbody tr.clickable:hover td {
+    background: #ffbd43;
+    cursor: pointer;
+}

@@ -2,6 +2,14 @@
 
 @section('title', 'management')
 
+@section('js')
+<script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
+@section('stylesheet')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="col-md-12">
     <div class="card text-center">
@@ -16,8 +24,6 @@
             </nav>
                 <div class="tab-content" id="nav-tabContent">
 
-                <!-- 行クリック参考：http://kachibito.net/snippets/table-tr-link-clickable -->
-
                 <!-- QUESTIONS -->
                 <div class="tab-pane fade show active" id="nav-question" role="tabpanel" aria-labelledby="nav-question-tab">
                     <h1 style="margin:30px 0;">Question List</h1>
@@ -31,9 +37,9 @@
                         </thead>
                         <tbody>
                             @foreach( $questionsData as $question )
-                            <tr>
+                            <tr data-href="{{ route('admin.question_details', $question->id) }}">
                                 <th scope="row">{{ $question->id }}</th>
-                                <td><a href="{{ route('admin.question_details', $question->id) }}">{{ $question->text }}</a></td>
+                                <td>{{ $question->text }}</td>
                                 <td>Answer</td>
                             </tr>
                             @endforeach
@@ -54,9 +60,9 @@
                         </thead>
                         <tbody>
                             @foreach( $giftsData as $gift )
-                            <tr>
+                            <tr data-href="{{ route('admin.gift_details', $gift->id) }}"">
                                 <th scope="row">{{ $gift->image_path }}</th>
-                                <td><a href="{{ route('admin.gift_details', $gift->id) }}">{{ $gift->name }}</a></td>
+                                <td>{{ $gift->name }}</td>
                                 <td>quantity</td>
                             </tr>
                             @endforeach
@@ -77,9 +83,9 @@
                         </thead>
                         <tbody>
                             @foreach( $usersData as $user )
-                            <tr>
+                            <tr data-href="{{ route('admin.user_details', $user->id) }}">
                                 <th scope="row">{{ $user->id }}</th>
-                                <td><a href="{{ route('admin.user_details', $user->id) }}">{{ $user->name }}</a></td>
+                                <td>{{ $user->name }}</td>
                                 <td>{{ $user->point }}</td>
                             </tr>
                             @endforeach
