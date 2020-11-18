@@ -85,7 +85,7 @@
             <div class="col-md-4 col-sm-4 pt-2 text-left">
                 <button type="button" class="btn btn_deleate" data-toggle="modal" data-target="#exampleModalCenter" onClick="clickDelete({{ $ag }}, {{ $ag->pivot->quantity }})">
                     <i class="far fa-times-circle fa-lg"></i>
-                    </button>
+                </button>
                 <h4>{{ $ag->name }}</h4><br/>
                 <p>応募数：{{ $ag->pivot->quantity }}</p>
             </div>

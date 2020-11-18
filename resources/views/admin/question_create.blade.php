@@ -16,7 +16,7 @@
             <div class="card-header"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>Ｑ</span>ｕｅｓｔｉｏｎ - 新規作成</span></div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.question_new') }}">
+                <form method="POST" action="{{ route('admin.question_check') }}">
                     @csrf
 
                     <div class="row">
@@ -28,7 +28,7 @@
                                 <select id="genre" class="form-control @error('genre') is-invalid @enderror" name="genre" value="{{ old('genre') }}" required autocomplete="genre">
                                     <option value="">選択してください</option>
                                     @foreach( $genres as $genre )
-                                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                    <option value="{{ $genre->name }}">{{ $genre->name }}</option>
                                     @endforeach
                                 </select>
 
@@ -123,7 +123,7 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4 input_btn">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('登録') }}
+                                {{ __('確認') }}
                             </button>
 
  

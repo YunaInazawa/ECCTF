@@ -97,6 +97,26 @@ class AdminController extends Controller
     }
 
     /**
+     * 08_確認画面（問題）
+     */
+    public function question_check( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $genre = $request->genre;
+        $level = $request->level;
+        $text = $request->text;
+        $type = $request->type;
+        $answer = $request->answer;
+        $commentary = $request->commentary;
+        $correct = $request->correct;
+
+        if( $type == '多答クイズ' ){
+            $correct = implode('<br />', $correct);
+        }
+        
+        return view('admin.question_check', ['genre' => $genre, 'level' => $level, 'text' => $text, 'type' => $type, 'answer' => $answer, 'commentary' => $commentary, 'correct' => $correct]);
+    }
+
+    /**
      * DB 登録（問題）
      */
     public function question_new() {
