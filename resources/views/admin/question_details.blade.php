@@ -15,6 +15,7 @@
             <hr>
 
             <!-- 選択肢 -->
+            @if( $questionData->type->name == '択一クイズ' || $questionData->type->name == '二択クイズ' || $questionData->type->name == '多答クイズ' )
             <p>< 選択肢 ></p>
             <p>
                 @foreach( $choicesData as $choice )
@@ -22,6 +23,7 @@
                 @endforeach
             </p>
             <hr>
+            @endif
 
             <!-- 正解 -->
             <p>< 正解 ></p>
