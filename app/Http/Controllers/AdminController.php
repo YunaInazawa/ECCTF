@@ -8,6 +8,9 @@ use App\Question;
 use App\Gift;
 use App\Choice;
 use App\UserGift;
+use App\Type;
+use App\Level;
+use App\Genre;
 
 class AdminController extends Controller
 {
@@ -80,5 +83,23 @@ class AdminController extends Controller
         $userData = User::find($id);
         
         return view('admin.user_details', ['userData' => $userData]);
+    }
+
+    /**
+     * 07_作成画面（問題）
+     */
+    public function question_create() {
+        $types = Type::all();
+        $levels = Level::all();
+        $genres = Genre::all();
+        
+        return view('admin.question_create', ['types' => $types, 'levels' => $levels, 'genres' => $genres]);
+    }
+
+    /**
+     * DB 登録（問題）
+     */
+    public function question_new() {
+        return redirect()->route('admin.question_details', 1);
     }
 }

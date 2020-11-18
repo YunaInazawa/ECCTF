@@ -27,6 +27,7 @@
                 <!-- QUESTIONS -->
                 <div class="tab-pane fade show active" id="nav-question" role="tabpanel" aria-labelledby="nav-question-tab">
                     <h1 style="margin:30px 0;">Question List</h1>
+                    <p><a href="#">QUESTION 追加</a></p>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -54,6 +55,7 @@
                 <!-- GIFTS -->
                 <div class="tab-pane fade" id="nav-gift" role="tabpanel" aria-labelledby="nav-gift-tab">
                 <h1 style="margin:30px 0;">Gift List</h1>
+                <p><a href="#">GIFT 追加</a></p>
                 <table class="table table-striped">
                         <thead>
                             <tr>

@@ -30,5 +30,7 @@ Route::post('/apply', 'PlayerController@apply')->name('player.apply');
 
 Route::get('/management', 'AdminController@index')->name('admin.management');
 Route::get('/question_details/{id}', 'AdminController@question_details')->name('admin.question_details');
-Route::get('gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
-Route::get('user_details/{id}', 'AdminCOntroller@user_details')->name('admin.user_details');
+Route::get('/gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
+Route::get('/user_details/{id}', 'AdminCOntroller@user_details')->name('admin.user_details');
+Route::get('/question_create', 'AdminController@question_create')->name('admin.question_create');
+Route::post('/question_new', 'AdminCOntroller@question_new')->name('admin.question_new');
