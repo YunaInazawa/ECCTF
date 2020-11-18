@@ -119,7 +119,46 @@ class AdminController extends Controller
     /**
      * DB 登録（問題）
      */
-    public function question_new() {
-        return redirect()->route('admin.question_details', 1);
+    public function question_new( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $genre = $request->genre;
+        $level = $request->level;
+        $text = $request->text;
+        $type = $request->type;
+        $answer = $request->answer;
+        $commentary = $request->commentary;
+        $correct = $request->correct;
+
+        if( $type == '多答クイズ' ){
+            $correct = explode('<br />', $correct);
+        }
+
+        // DB 登録
+        $addQuestion = new Question;
+        $addQuestion->text = $text;
+        $addQuestion->commentary = $commentary;
+        $addQuestion->genre_id = Genre::where('name', $genre)->first()->id;
+        $addQuestion->type_id = Type::where('name', $type)->first()->id;
+        $addQuestion->level_id = Level::where('name', $level)->first()->id;
+        $addQuestion->save();
+
+        foreach( $answer as $a ){
+            $addChoice = new Choice;
+            $addChoice->text = $a;
+            $addChoice->is_correct = $this->checkCorrect($type, $a, $correct);
+            $addChoice->question_id = $addQuestion->id;
+            $addChoice->save();
+        }
+
+        return redirect()->route('admin.question_details', $addQuestion->id);
+    }
+
+    function checkCorrect($type, $a, $correct) {
+        if( $type == '多答クイズ' ){
+            return in_array($a, $correct);
+    
+        }else{
+            return $a == $correct;
+        }
     }
 }
