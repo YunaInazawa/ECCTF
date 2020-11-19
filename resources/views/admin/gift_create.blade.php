@@ -36,14 +36,21 @@
                     </div>
 
                     <!-- 画像 -->
-                    <div class="form-group">
+                    <div class="form-group row">
                         <input type="hidden" name="giftImage" value="noImage">
-                        <input type="file" class="md-8 offset-md-2" id="giftImage" name="giftImageFile">
+                        <input type="file" class="col-md-8 offset-md-2" id="giftImage" name="giftImageFile">
                         
                     </div>
 
                     <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4 input_btn">
+                        <div class="col-md-4 offset-md-2 text-md-left input_btn">
+                            <button type="button" class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">
+                                {{ __('戻る') }}
+                            </button>
+
+                        </div>
+
+                        <div class="col-md-4 input_btn">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('確認') }}
                             </button>
