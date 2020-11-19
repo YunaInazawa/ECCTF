@@ -53,6 +53,10 @@ class AdminController extends Controller
     }
 
     /**
+     * 問題ページ
+     */
+
+    /**
      * 07_作成画面（問題）
      */
     public function question_create() {
@@ -61,14 +65,6 @@ class AdminController extends Controller
         $genres = Genre::all();
         
         return view('admin.question_create', ['types' => $types, 'levels' => $levels, 'genres' => $genres]);
-    }
-
-    /**
-     * 07_作成画面（景品）
-     */
-    public function gift_create() {
-        
-        return view('admin.gift_create');
     }
 
     /**
@@ -103,25 +99,6 @@ class AdminController extends Controller
         }
 
         return view('admin.question_check', ['input' => $input]);
-    }
-
-    /**
-     * 08_確認画面（景品）
-     */
-    public function gift_check( Request $request ) {
-        $request -> session() -> regenerateToken();
-
-        $input = $request->only($this->giftItems);
-        $request->session()->put('gift_input', $input);
-
-        if( empty($request->file('giftImage')) ){
-            $giftImage = 'noImage';
-        }else{
-            $path = $request->file('giftImage')->store('public/gift');
-            $giftImage = basename($path);
-        }
-
-        return view('admin.gift_check', ['input' => $input, 'giftImage' => $giftImage]);
     }
 
     /**
@@ -186,51 +163,6 @@ class AdminController extends Controller
     }
 
     /**
-     * DB 登録（景品）
-     */
-    public function gift_new( Request $request ) {
-        $request -> session() -> regenerateToken();
-        $input = $request->session()->get('gift_input');
-        $giftImage = $request->giftImage;
-        // $id = $request->session()->get('gift_id');
-
-        if( $request->has('back') ){
-            // 「戻る」ボタンが押されたとき
-            // if( !!$id ){
-            //     return redirect()->route('admin.gift_edit', $id)->withInput($input);
-            // }else{
-            //     return redirect()->route('admin.gift_create')->withInput($input);
-            // }
-
-            return redirect()->route('admin.gift_create')->withInput($input);
-        
-        }
-
-        // if( !!$id ){
-        //     // 編集
-        //     $addQuestion = Question::find($id);
-
-        // }else{
-        //     // 新規登録
-        //     $addQuestion = new Question;
-
-        // }
-
-        $addGift = new Gift;;
-
-        $addGift->name = $input['giftName'];
-        $addGift->description = $input['giftDescription'];
-        if( $giftImage != 'noImage' ) $addGift->image_path = $giftImage;
-        $addGift->save();
-        
-        $request->session()->forget('gift_input');
-        $request->session()->forget('gift_id');
-
-        return redirect()->route('admin.gift_details', $addGift->id);
-
-    }
-
-    /**
      * 削除（問題）
      */
     public function question_del( $id ) {
@@ -260,6 +192,92 @@ class AdminController extends Controller
     }
 
     /**
+     * 景品ページ
+     */
+
+    /**
+     * 07_作成画面（景品）
+     */
+    public function gift_create() {
+        
+        return view('admin.gift_create');
+    }
+
+    /**
+     * 07_編集画面（景品）
+     */
+    public function gift_edit( $id ) {
+        $giftData = Gift::find($id);
+        
+        return view('admin.gift_edit', ['giftData' => $giftData]);
+    }
+
+    /**
+     * 08_確認画面（景品）
+     */
+    public function gift_check( Request $request ) {
+        $request -> session() -> regenerateToken();
+
+        $input = $request->only($this->giftItems);
+        $request->session()->put('gift_input', $input);
+
+        if( empty($request->file('giftImageFile')) ){
+            $giftImage = $request->giftImage;
+
+        }else{
+            $path = $request->file('giftImageFile')->store('public/gift');
+            $giftImage = basename($path);
+        }
+
+        if( !empty($request->gift_id) ){
+            $request->session()->put('gift_id', $request->gift_id);
+        }
+
+        return view('admin.gift_check', ['input' => $input, 'giftImage' => $giftImage]);
+    }
+
+    /**
+     * DB 登録（景品）
+     */
+    public function gift_new( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $input = $request->session()->get('gift_input');
+        $giftImage = $request->giftImage;
+        $id = $request->session()->get('gift_id');
+
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            if( !!$id ){
+                return redirect()->route('admin.gift_edit', $id)->withInput($input);
+            }else{
+                return redirect()->route('admin.gift_create')->withInput($input);
+            }
+        
+        }
+
+        if( !!$id ){
+            // 編集
+            $addGift = Gift::find($id);
+
+        }else{
+            // 新規登録
+            $addGift = new Gift;
+
+        }
+
+        $addGift->name = $input['giftName'];
+        $addGift->description = $input['giftDescription'];
+        $addGift->image_path = ($giftImage == 'noImage' ? null : $giftImage);
+        $addGift->save();
+        
+        $request->session()->forget('gift_input');
+        $request->session()->forget('gift_id');
+
+        return redirect()->route('admin.gift_details', $addGift->id);
+
+    }
+
+    /**
      * 09_詳細画面（景品）
      */
     public function gift_details( $id ) {
@@ -267,6 +285,10 @@ class AdminController extends Controller
         
         return view('admin.gift_details', ['giftData' => $giftData]);
     }
+
+    /**
+     * ユーザページ
+     */
 
     /**
      * 09_詳細画面（ユーザ）

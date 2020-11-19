@@ -91,3 +91,9 @@ function answerChange( num ){
   document.getElementsByName('correct[]')[num-1].value = newStr;
 
 }
+
+function clearImage() {
+  document.getElementById('imageDisplay').innerHTML = '<input type="file" id="giftImage" name="giftImageFile">';
+  document.getElementsByName('giftImage')[0].value = 'noImage';
+  
+}

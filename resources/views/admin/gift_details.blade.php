@@ -34,7 +34,7 @@
                 </p>
 
                 <button class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">戻る</button>
-                <button class="btn btn-primary">編集</button>
+                <button class="btn btn-primary" onclick=location.href="{{ route('admin.gift_edit', $giftData->id) }}">編集</button>
                 <button class="btn btn-primary">削除</button>
         </div>
     </div>

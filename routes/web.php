@@ -39,6 +39,7 @@ Route::get('/question_delete/{id}', 'AdminController@question_del')->name('admin
 
 Route::get('/gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
 Route::get('/gift_create', 'AdminController@gift_create')->name('admin.gift_create');
+Route::get('/gift_edit/{id}', 'AdminController@gift_edit')->name('admin.gift_edit');
 Route::post('/gift_check', 'AdminController@gift_check')->name('admin.gift_check');
 Route::post('/gift_new', 'AdminCOntroller@gift_new')->name('admin.gift_new');
 
