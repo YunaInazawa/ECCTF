@@ -12,6 +12,7 @@ use App\Type;
 use App\Level;
 use App\Genre;
 use App\Course;
+use App\Card;
 use Hash;
 
 class AdminController extends Controller
@@ -36,6 +37,7 @@ class AdminController extends Controller
         $usersData = User::where('is_admin', 0)->get();
         $questionsData = Question::all();
         $giftsData = Gift::all();
+        $cardsData = Card::all();
         $corrects = array();
         $quantitys = array();
 
@@ -52,7 +54,7 @@ class AdminController extends Controller
             $quantitys[$gift->id] = $sum;
         }
 
-        return view('admin.management', ['usersData' => $usersData, 'questionsData' => $questionsData, 'giftsData' => $giftsData, 'corrects' => $corrects, 'quantitys' => $quantitys]);
+        return view('admin.management', ['usersData' => $usersData, 'questionsData' => $questionsData, 'giftsData' => $giftsData, 'corrects' => $corrects, 'quantitys' => $quantitys, 'cardsData' => $cardsData]);
     }
 
     /**
@@ -392,6 +394,19 @@ class AdminController extends Controller
         $userData = User::find($id);
         
         return view('admin.user_details', ['userData' => $userData]);
+    }
+
+    /**
+     * カード編成ページ
+     */
+
+    /**
+     * 09_詳細画面（カード）
+     */
+    public function card_details( $id ) {
+        $cardData = Card::find($id);
+        
+        return view('admin.card_details', ['cardData' => $cardData]);
     }
 
     function checkCorrect($type, $a, $correct) {

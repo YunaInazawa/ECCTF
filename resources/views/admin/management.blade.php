@@ -29,6 +29,7 @@
                 <a class="nav-link active" id="nav-question-tab" data-toggle="tab" href="#nav-question" role="tab" aria-controls="nav-question" aria-selected="true">Question</a>
                 <a class="nav-link" id="nav-gift-tab" data-toggle="tab" href="#nav-gift" role="tab" aria-controls="nav-gift" aria-selected="false">Gift</a>
                 <a class="nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">User</a>
+                <a class="nav-link" id="nav-card-tab" data-toggle="tab" href="#nav-card" role="tab" aria-controls="nav-user" aria-selected="false">Card</a>
             </div>
             </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -104,6 +105,27 @@
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->point }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CARDS -->
+                <div class="tab-pane fade" id="nav-card" role="tabpanel" aria-labelledby="nav-card-tab">
+                <h1 style="margin:30px 0;">Card List</h1>
+                <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach( $cardsData as $card )
+                            <tr data-href="{{ route('admin.card_details', $card->id) }}">
+                                <th scope="row">{{ $card->id }}</th>
+                                <td>{{ $card->name }}</td>
                             </tr>
                             @endforeach
                         </tbody>
