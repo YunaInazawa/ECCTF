@@ -1,6 +1,6 @@
 @extends('layouts.app_header')
 
-@section('title', 'question_check')
+@section('title', 'gift_check')
 
 @section('js')
 <script src="{{ asset('js/admin.js') }}" defer></script>
