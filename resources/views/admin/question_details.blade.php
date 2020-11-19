@@ -34,8 +34,8 @@
             <p>< 解説 ></p>
             <p>{!! nl2br($questionData->commentary) !!}</p>
 
-            <button class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">戻る</button>
-            <button class="btn btn-primary">編集</button>
+            <button class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">一覧</button>
+            <button class="btn btn-primary" onclick=location.href="{{ route('admin.question_edit', $questionData->id) }}">編集</button>
             <button class="btn btn-primary">削除</button>
 
         </div>
