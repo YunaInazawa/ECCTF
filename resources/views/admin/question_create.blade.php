@@ -99,11 +99,14 @@
 
                     <!-- 回答（タイプによって変更） -->
                     <div class="form-group">
-                        <label for="answer" class="col-md-8 offset-md-2 col-form-label input_label">{{ __('回答') }}</label>
+                        <label for="answer" class="col-md-8 offset-md-2 col-form-label input_label">{{ __('回答') }}
+                        @if( session('flash_message') )
+                        ※ {{ session('flash_message') }}
+                        @endif</label>
 
                         <div class="col-md-8 offset-md-2">
                             <div id="answerArea">
-                                @if( empty(old('correct')) )
+                                @if( empty(old('correct')) && empty(old('answer')) )
                                     <!-- old が存在しないとき -->
                                     「回答タイプ」を選択してください
 
@@ -124,7 +127,7 @@
                                     @elseif( old('type') == '多答クイズ' )
                                         @for( $i = 1; $i <= count(old('answer')); $i++ )
                                         <input type="hidden" id="answerIdHidden{{ $i }}" name="answer[]" value="{{ old('answer.' . ($i-1)) }}">
-                                        <div class="form-check"><input type="checkbox" class="form-check-input" name="correct[]" value="{{ old('answer.' . ($i-1)) }}" <?php if(in_array(old('answer.' . ($i-1)), old('correct'))) echo 'checked'; ?>><label id="answerId{{ $i }}" class="form-check-label lie-link" onclick="answerChange({{ $i }})">{{ old('answer.' . ($i-1)) }}</label></div>
+                                        <div class="form-check"><input type="checkbox" class="form-check-input" name="correct[]" value="{{ old('answer.' . ($i-1)) }}" <?php if( !empty(old('correct')) ){if(in_array(old('answer.' . ($i-1)), old('correct'))) echo 'checked';} ?>><label id="answerId{{ $i }}" class="form-check-label lie-link" onclick="answerChange({{ $i }})">{{ old('answer.' . ($i-1)) }}</label></div>
                                         @endfor
 
                                     @else

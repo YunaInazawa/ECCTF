@@ -105,6 +105,11 @@ class AdminController extends Controller
         $request -> session() -> regenerateToken();
 
         $input = $request->only($this->questionItems);
+
+        if( empty($input['correct']) ){
+            return redirect()->route('admin.question_create')->withInput($input)->with('flash_message', '正解を選択してください');
+        }
+
         $request->session()->put('question_input', $input);
 
         // $genre = $request->genre;
