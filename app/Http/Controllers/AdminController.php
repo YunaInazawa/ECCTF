@@ -11,6 +11,7 @@ use App\UserGift;
 use App\Type;
 use App\Level;
 use App\Genre;
+use App\Course;
 
 class AdminController extends Controller
 {
@@ -300,6 +301,81 @@ class AdminController extends Controller
     /**
      * ユーザページ
      */
+
+    /**
+     * 07_編集画面（ユーザ）
+     */
+    public function user_edit( $id ) {
+        $userData = User::find($id);
+        $courseDatas = Course::all();
+        
+        return view('admin.user_edit', ['userData' => $userData, 'courseDatas' => $courseDatas]);
+    }
+    
+    /**
+     * 08_確認画面（ユーザ）
+     */
+    public function user_check( Request $request ) {
+        $request -> session() -> regenerateToken();
+
+        $input = $request->only($this->giftItems);
+        $request->session()->put('gift_input', $input);
+
+        if( empty($request->file('giftImageFile')) ){
+            $giftImage = $request->giftImage;
+
+        }else{
+            $path = $request->file('giftImageFile')->store('public/gift');
+            $giftImage = basename($path);
+        }
+
+        if( !empty($request->gift_id) ){
+            $request->session()->put('gift_id', $request->gift_id);
+        }
+
+        return view('admin.gift_check', ['input' => $input, 'giftImage' => $giftImage]);
+    }
+
+    /**
+     * DB 登録（ユーザ）
+     */
+    public function user_update( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $input = $request->session()->get('gift_input');
+        $giftImage = $request->giftImage;
+        $id = $request->session()->get('gift_id');
+
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            if( !!$id ){
+                return redirect()->route('admin.gift_edit', $id)->withInput($input);
+            }else{
+                return redirect()->route('admin.gift_create')->withInput($input);
+            }
+        
+        }
+
+        if( !!$id ){
+            // 編集
+            $addGift = Gift::find($id);
+
+        }else{
+            // 新規登録
+            $addGift = new Gift;
+
+        }
+
+        $addGift->name = $input['giftName'];
+        $addGift->description = $input['giftDescription'];
+        $addGift->image_path = ($giftImage == 'noImage' ? null : $giftImage);
+        $addGift->save();
+        
+        $request->session()->forget('gift_input');
+        $request->session()->forget('gift_id');
+
+        return redirect()->route('admin.gift_details', $addGift->id);
+
+    }
 
     /**
      * 09_詳細画面（ユーザ）

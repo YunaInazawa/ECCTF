@@ -33,15 +33,18 @@ Route::get('/management', 'AdminController@index')->name('admin.management');
 Route::get('/question_details/{id}', 'AdminController@question_details')->name('admin.question_details');
 Route::get('/question_create', 'AdminController@question_create')->name('admin.question_create');
 Route::get('/question_edit/{id}', 'AdminController@question_edit')->name('admin.question_edit');
-Route::post('/question_check', 'AdminCOntroller@question_check')->name('admin.question_check');
-Route::post('/question_new', 'AdminCOntroller@question_new')->name('admin.question_new');
+Route::post('/question_check', 'AdminController@question_check')->name('admin.question_check');
+Route::post('/question_new', 'AdminController@question_new')->name('admin.question_new');
 Route::get('/question_delete/{id}', 'AdminController@question_del')->name('admin.question_delete');
 
 Route::get('/gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
 Route::get('/gift_create', 'AdminController@gift_create')->name('admin.gift_create');
 Route::get('/gift_edit/{id}', 'AdminController@gift_edit')->name('admin.gift_edit');
 Route::post('/gift_check', 'AdminController@gift_check')->name('admin.gift_check');
-Route::post('/gift_new', 'AdminCOntroller@gift_new')->name('admin.gift_new');
+Route::post('/gift_new', 'AdminController@gift_new')->name('admin.gift_new');
 Route::get('/gift_delete/{id}', 'AdminController@gift_del')->name('admin.gift_delete');
 
-Route::get('/user_details/{id}', 'AdminCOntroller@user_details')->name('admin.user_details');
+Route::get('/user_details/{id}', 'AdminController@user_details')->name('admin.user_details');
+Route::get('/user_edit/{id}', 'AdminController@user_edit')->name('admin.user_edit');
+Route::post('/user_check', 'AdminController@user_check')->name('admin.user_check');
+Route::post('/user_update', 'AdminController@user_update')->name('admin.user_update');
