@@ -15,8 +15,9 @@ jQuery(function($) {
   });
 });
 
-var typeValue = '';     // 選択中の値
 function changeType() {
+  var typeValue = document.getElementById('typeValue').value;
+
   // 値は選択されているか？
   if( typeValue != '' ){
     if( confirm('入力している回答がリセットされます。よろしいですか？') ){
@@ -35,6 +36,8 @@ function changeType() {
     changeAnswerArea(typeValue);
 
   }
+
+  document.getElementById('typeValue').value = typeValue;
 }
 
 var answerId = 1;
@@ -48,17 +51,17 @@ function changeAnswerArea( type ) {
   }else{
     if( type == '択一クイズ' ){
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
-      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct" value="選択肢' + answerId + '" checked><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
+      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct[]" value="選択肢' + answerId + '" checked><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
-      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
+      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct[]" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
-      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
+      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct[]" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
   
     }else if( type == '二択クイズ' ){
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
-      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct" value="選択肢' + answerId + '" checked><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
+      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct[]" value="選択肢' + answerId + '" checked><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
-      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
+      str += '<div class="form-check"><input type="radio" class="form-check-input" name="correct[]" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
   
     }else if( type == '多答クイズ' ){
       str += '<input type="hidden" id="answerIdHidden' + answerId + '" name="answer[]" value="選択肢' + answerId + '">';
@@ -69,8 +72,7 @@ function changeAnswerArea( type ) {
       str += '<div class="form-check"><input type="checkbox" class="form-check-input" name="correct[]" value="選択肢' + answerId + '"><label id="answerId' + answerId + '" class="form-check-label lie-link" onclick=answerChange(' + answerId + ')>選択肢' + answerId++ + '</label></div>';
   
     }else{    // 穴抜けコード or 一問一答
-      str += '<input type="hidden" name="answer[]" value="選択肢' + answerId + '">';
-      str = '<input type="text" class="form-control" name="correct" required autocomplete="answer">';
+      str = '<input type="text" class="form-control" name="correct[]" required autocomplete="answer">';
   
     }
     document.getElementById('answerArea').innerHTML = str;
@@ -86,7 +88,6 @@ function answerChange( num ){
 
   document.getElementById('answerIdHidden' + num).value = newStr;
 
-  var nameStr = typeValue == '多答クイズ' ? 'correct[]' : 'correct';
-  document.getElementsByName(nameStr)[num-1].value = newStr;
+  document.getElementsByName('correct[]')[num-1].value = newStr;
 
 }

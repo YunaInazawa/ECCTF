@@ -11,54 +11,49 @@
 
                 <!-- ジャンル -->
                 <p>< ジャンル ></p>
-                <p>{{ $genre }}</p>
-                <input type="hidden" name="genre" value="{{ $genre }}">
+                <p>{{ $input['genre'] }}</p>
                 <hr>
 
                 <!-- レベル -->
                 <p>< レベル ></p>
-                <p>{{ $level }}</p>
-                <input type="hidden" name="level" value="{{ $level }}">
+                <p>{{ $input['level'] }}</p>
                 <hr>
 
                 <!-- 問題文 -->
                 <p>< 問題文 ></p>
-                <p>{!! nl2br($text) !!}</p>
-                <input type="hidden" name="text" value="{{ $text }}">
+                <p>{!! nl2br($input['text']) !!}</p>
                 <hr>
 
                 <!-- 回答タイプ -->
                 <p>< 回答タイプ ></p>
-                <p>{{ $type }}</p>
-                <input type="hidden" name="type" value="{{ $type }}">
+                <p>{{ $input['type'] }}</p>
                 <hr>
 
                 <!-- 選択肢 -->
-                @if( $type == '択一クイズ' || $type == '二択クイズ' || $type == '多答クイズ' )
+                @if( $input['type'] == '択一クイズ' || $input['type'] == '二択クイズ' || $input['type'] == '多答クイズ' )
                 <p>< 選択肢 ></p>
                 <p>
-                    @foreach( $answer as $a )
-                    {{ $a }}
-                    <input type="hidden" name="answer[]" value="{{ $a }}"><br />
+                    @foreach( $input['answer'] as $a )
+                    {{ $a }}<br />
                     @endforeach
                 </p>
                 <hr>
-                @else
-                <input type="hidden" name="answer[]" value="{{ $answer[0] }}"><br />
                 @endif
 
                 <!-- 正解 -->
                 <p>< 正解 ></p>
-                <p>{!! nl2br($correct) !!}</p>
-                <input type="hidden" name="correct" value="{{ $correct }}">
+                <p>
+                    @foreach( $input['correct'] as $c )
+                    {{ $c }}<br />
+                    @endforeach
+                </p>
                 <hr>
 
                 <!-- 解説 -->
                 <p>< 解説 ></p>
-                <p>{!! nl2br($commentary) !!}</p>
-                <input type="hidden" name="commentary" value="{{ $commentary }}">
+                <p>{!! nl2br($input['commentary']) !!}</p>
 
-                <button type="button" class="btn btn-primary">戻る</button>
+                <button type="submit" name="back" class="btn btn-primary">戻る</button>
                 <button type="submit" class="btn btn-primary">登録</button>
             </form>
         </div>

@@ -14,6 +14,8 @@ use App\Genre;
 
 class AdminController extends Controller
 {
+    private $questionItems = ['genre', 'level', 'text', 'type', 'answer', 'correct', 'commentary'];
+
     /**
      * Create a new controller instance.
      *
@@ -101,19 +103,24 @@ class AdminController extends Controller
      */
     public function question_check( Request $request ) {
         $request -> session() -> regenerateToken();
-        $genre = $request->genre;
-        $level = $request->level;
-        $text = $request->text;
-        $type = $request->type;
-        $answer = $request->answer;
-        $commentary = $request->commentary;
-        $correct = $request->correct;
 
-        if( $type == '多答クイズ' ){
-            $correct = implode('<br />', $correct);
-        }
+        $input = $request->only($this->questionItems);
+        $request->session()->put('question_input', $input);
+
+        // $genre = $request->genre;
+        // $level = $request->level;
+        // $text = $request->text;
+        // $type = $request->type;
+        // $answer = $request->answer;
+        // $commentary = $request->commentary;
+        // $correct = $request->correct;
+
+        // if( $type == '多答クイズ' ){
+        //     $correct = implode('<br />', $correct);
+        // }
         
-        return view('admin.question_check', ['genre' => $genre, 'level' => $level, 'text' => $text, 'type' => $type, 'answer' => $answer, 'commentary' => $commentary, 'correct' => $correct]);
+        // return view('admin.question_check', ['genre' => $genre, 'level' => $level, 'text' => $text, 'type' => $type, 'answer' => $answer, 'commentary' => $commentary, 'correct' => $correct]);
+        return view('admin.question_check', ['input' => $input]);
     }
 
     /**
@@ -121,34 +128,51 @@ class AdminController extends Controller
      */
     public function question_new( Request $request ) {
         $request -> session() -> regenerateToken();
-        $genre = $request->genre;
-        $level = $request->level;
-        $text = $request->text;
-        $type = $request->type;
-        $answer = $request->answer;
-        $commentary = $request->commentary;
-        $correct = $request->correct;
+        $input = $request->session()->get('question_input');
 
-        if( $type == '多答クイズ' ){
-            $correct = explode('<br />', $correct);
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            return redirect()->route('admin.question_create')->withInput($input);
         }
+
+
+        // $genre = $request->genre;
+        // $level = $request->level;
+        // $text = $request->text;
+        // $type = $request->type;
+        // $answer = $request->answer;
+        // $commentary = $request->commentary;
+        // $correct = $request->correct;
+
+        // if( $type == '多答クイズ' ){
+        //     $correct = explode('<br />', $correct);
+        // }
 
         // DB 登録
         $addQuestion = new Question;
-        $addQuestion->text = $text;
-        $addQuestion->commentary = $commentary;
-        $addQuestion->genre_id = Genre::where('name', $genre)->first()->id;
-        $addQuestion->type_id = Type::where('name', $type)->first()->id;
-        $addQuestion->level_id = Level::where('name', $level)->first()->id;
+        $addQuestion->text = $input['text'];
+        $addQuestion->commentary = $input['commentary'];
+        $addQuestion->genre_id = Genre::where('name', $input['genre'])->first()->id;
+        $addQuestion->type_id = Type::where('name', $input['type'])->first()->id;
+        $addQuestion->level_id = Level::where('name', $input['level'])->first()->id;
         $addQuestion->save();
 
-        foreach( $answer as $a ){
+        if( empty($input['answer']) ){
             $addChoice = new Choice;
-            $addChoice->text = $a;
-            $addChoice->is_correct = $this->checkCorrect($type, $a, $correct);
+            $addChoice->text = $input['correct'][0];
+            $addChoice->is_correct = true;
             $addChoice->question_id = $addQuestion->id;
             $addChoice->save();
+        }else{
+            foreach( $input['answer'] as $a ){
+                $addChoice = new Choice;
+                $addChoice->text = $a;
+                $addChoice->is_correct = $this->checkCorrect($input['type'], $a, $input['correct']);
+                $addChoice->question_id = $addQuestion->id;
+                $addChoice->save();
+            }
         }
+        
 
         return redirect()->route('admin.question_details', $addQuestion->id);
     }
@@ -158,7 +182,7 @@ class AdminController extends Controller
             return in_array($a, $correct);
     
         }else{
-            return $a == $correct;
+            return $a == $correct[0];
         }
     }
 }
