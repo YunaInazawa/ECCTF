@@ -36,3 +36,4 @@ Route::get('/question_create', 'AdminController@question_create')->name('admin.q
 Route::get('/question_edit/{id}', 'AdminController@question_edit')->name('admin.question_edit');
 Route::post('/question_check', 'AdminCOntroller@question_check')->name('admin.question_check');
 Route::post('/question_new', 'AdminCOntroller@question_new')->name('admin.question_new');
+Route::get('/question_delete/{id}', 'AdminController@question_del')->name('admin.question_delete');

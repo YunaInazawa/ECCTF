@@ -14,6 +14,15 @@
 <div class="col-md-12">
     <div class="card text-center">
         <div class="card-body">
+            <div class="form-group">
+                <!-- フラッシュメッセージ -->
+                @if (session('flash_message'))
+                    <div class="flash_message">
+                        {!! nl2br(session('flash_message')) !!}
+                        <hr>
+                    </div>
+                @endif
+            </div>
 
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">

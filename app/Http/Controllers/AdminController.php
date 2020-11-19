@@ -53,41 +53,6 @@ class AdminController extends Controller
     }
 
     /**
-     * 09_詳細画面（問題）
-     */
-    public function question_details( $id ) {
-        $questionData = Question::find($id);
-        $choicesData = Choice::where('question_id', $id)->get();
-        $correct = '';
-
-        foreach( $choicesData as $choice ){
-            if( $choice->is_correct == 1 ){
-                $correct .= $choice->text . '<br />';
-            }
-        }
-        
-        return view('admin.question_details', ['questionData' => $questionData, 'choicesData' => $choicesData, 'correct' => $correct]);
-    }
-
-    /**
-     * 09_詳細画面（景品）
-     */
-    public function gift_details( $id ) {
-        $giftData = Gift::find($id);
-        
-        return view('admin.gift_details', ['giftData' => $giftData]);
-    }
-
-    /**
-     * 09_詳細画面（ユーザ）
-     */
-    public function user_details( $id ) {
-        $userData = User::find($id);
-        
-        return view('admin.user_details', ['userData' => $userData]);
-    }
-
-    /**
      * 07_作成画面（問題）
      */
     public function question_create() {
@@ -191,6 +156,53 @@ class AdminController extends Controller
         $request->session()->forget('question_id');
 
         return redirect()->route('admin.question_details', $addQuestion->id);
+    }
+
+    /**
+     * 削除（問題）
+     */
+    public function question_del( $id ) {
+        $question_id = Question::find($id)->id;
+
+        Question::find($id)->delete();
+        Choice::where('question_id', $id)->delete();
+        
+        return redirect()->route('admin.management')->with('flash_message', 'QUESTION < # ' . $question_id . ' ><br />削除しました');
+    }
+
+    /**
+     * 09_詳細画面（問題）
+     */
+    public function question_details( $id ) {
+        $questionData = Question::find($id);
+        $choicesData = Choice::where('question_id', $id)->get();
+        $correct = '';
+
+        foreach( $choicesData as $choice ){
+            if( $choice->is_correct == 1 ){
+                $correct .= $choice->text . '<br />';
+            }
+        }
+        
+        return view('admin.question_details', ['questionData' => $questionData, 'choicesData' => $choicesData, 'correct' => $correct]);
+    }
+
+    /**
+     * 09_詳細画面（景品）
+     */
+    public function gift_details( $id ) {
+        $giftData = Gift::find($id);
+        
+        return view('admin.gift_details', ['giftData' => $giftData]);
+    }
+
+    /**
+     * 09_詳細画面（ユーザ）
+     */
+    public function user_details( $id ) {
+        $userData = User::find($id);
+        
+        return view('admin.user_details', ['userData' => $userData]);
     }
 
     function checkCorrect($type, $a, $correct) {
