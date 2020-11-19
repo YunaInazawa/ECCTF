@@ -97,3 +97,18 @@ function clearImage() {
   document.getElementsByName('giftImage')[0].value = 'noImage';
   
 }
+
+function cellClick(num, genresData, levelsData) {
+  alert(document.getElementById('id'+num).innerText);
+  alert(document.getElementsByName(num)[0].value);
+
+  // modal の内容を変更
+
+}
+
+function cellChange() {
+  $('#exampleModalCenter').modal('hide');
+  
+  // セルとhiddenを変更
+
+}

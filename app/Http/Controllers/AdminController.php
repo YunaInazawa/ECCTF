@@ -13,6 +13,7 @@ use App\Level;
 use App\Genre;
 use App\Course;
 use App\Card;
+use App\PlaceQuestion;
 use Hash;
 
 class AdminController extends Controller
@@ -20,6 +21,14 @@ class AdminController extends Controller
     private $questionItems = ['genre', 'level', 'text', 'type', 'answer', 'correct', 'commentary'];
     private $giftItems = ['giftName', 'giftDescription'];
     private $userItems = ['course', 'student_num', 'name', 'email'];
+    private $cardItems = 
+        [   '0', '1', '2', '3', '4', 
+            '5', '6', '7', '8', '9', 
+            '10', '11', '12', '13', '14', 
+            '15', '16', '17', '18', '19', 
+            '20', '21', '22', '23', '24', 
+        ];
+
     /**
      * Create a new controller instance.
      *
@@ -401,12 +410,74 @@ class AdminController extends Controller
      */
 
     /**
+     * 07_編集画面（カード）
+     */
+    public function card_edit( $id ) {
+        $cardData = Card::find($id);
+        $placeData = PlaceQuestion::where('card_id', $id)->orderBy('place_id')->get();
+
+        $genresData = Genre::all();
+        $levelsData = Level::all();
+        
+        return view('admin.card_edit', ['cardData' => $cardData, 'placeData' => $placeData, 'genresData' => $genresData, 'levelsData' => $levelsData]);
+    }
+    
+    /**
+     * 08_確認画面（カード）
+     */
+    public function card_check( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $card_id = $request->card_id;
+        $card_name = $request->card_name;
+
+        $input = $request->only($this->cardItems);
+        $request->session()->put('card_input', $input);
+        $request->session()->put('card_id', $card_id);
+
+        return view('admin.card_check', ['input' => $input, 'card_id' => $card_id, 'card_name' => $card_name]);
+    }
+
+    /**
+     * DB 登録（カード）
+     */
+    public function card_update( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $input = $request->session()->get('card_input');
+        $id = $request->session()->get('card_id');
+
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            return redirect()->route('admin.card_edit', $id)->withInput($input);
+        
+        }
+        
+        foreach( $input as $i ){
+            $tmp = explode(",", $i);
+            $genre = $tmp[0];
+            $level = $tmp[1];
+            $count = 1;
+
+            $editCard = PlaceQuestion::where('card_id', $id)->where('place_id', $count++)->first();
+            $editCard->genre_id = Genre::where('name', $genre)->first()->id;
+            $editCard->level_id = Level::where('name', $level)->first()->id;
+            $editCard->save();
+        }
+        
+        $request->session()->forget('card_input');
+        $request->session()->forget('card_id');
+
+        return redirect()->route('admin.card_details', $id);
+
+    }
+
+    /**
      * 09_詳細画面（カード）
      */
     public function card_details( $id ) {
         $cardData = Card::find($id);
+        $placeData = PlaceQuestion::where('card_id', $id)->orderBy('place_id')->get();
         
-        return view('admin.card_details', ['cardData' => $cardData]);
+        return view('admin.card_details', ['cardData' => $cardData, 'placeData' => $placeData]);
     }
 
     function checkCorrect($type, $a, $correct) {

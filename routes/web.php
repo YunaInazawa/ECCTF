@@ -51,3 +51,6 @@ Route::post('/user_update', 'AdminController@user_update')->name('admin.user_upd
 Route::get('/user_delete/{id}', 'AdminController@user_del')->name('admin.user_delete');
 
 Route::get('/card_details/{id}', 'AdminController@card_details')->name('admin.card_details');
+Route::get('/card_edit/{id}', 'AdminController@card_edit')->name('admin.card_edit');
+Route::post('/card_check', 'AdminController@card_check')->name('admin.card_check');
+Route::post('/card_update', 'AdminController@card_update')->name('admin.card_update');
