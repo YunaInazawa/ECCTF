@@ -33,5 +33,6 @@ Route::get('/question_details/{id}', 'AdminController@question_details')->name('
 Route::get('/gift_details/{id}', 'AdminController@gift_details')->name('admin.gift_details');
 Route::get('/user_details/{id}', 'AdminCOntroller@user_details')->name('admin.user_details');
 Route::get('/question_create', 'AdminController@question_create')->name('admin.question_create');
+Route::get('/question_edit/{id}', 'AdminController@question_edit')->name('admin.question_edit');
 Route::post('/question_check', 'AdminCOntroller@question_check')->name('admin.question_check');
 Route::post('/question_new', 'AdminCOntroller@question_new')->name('admin.question_new');

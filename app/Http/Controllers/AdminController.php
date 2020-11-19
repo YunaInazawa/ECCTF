@@ -99,6 +99,19 @@ class AdminController extends Controller
     }
 
     /**
+     * 07_編集画面（問題）
+     */
+    public function question_edit( $id ) {
+        $types = Type::all();
+        $levels = Level::all();
+        $genres = Genre::all();
+        $questionData = Question::find($id);
+        $correctData = Choice::where('question_id', $id)->where('is_correct', true)->get();
+        
+        return view('admin.question_edit', ['types' => $types, 'levels' => $levels, 'genres' => $genres, 'id' => $id, 'questionData' => $questionData, 'correctData' => $correctData]);
+    }
+
+    /**
      * 08_確認画面（問題）
      */
     public function question_check( Request $request ) {
@@ -107,24 +120,15 @@ class AdminController extends Controller
         $input = $request->only($this->questionItems);
 
         if( empty($input['correct']) ){
-            return redirect()->route('admin.question_create')->withInput($input)->with('flash_message', '正解を選択してください');
+            return redirect()->back()->withInput($input)->with('flash_message', '正解を選択してください');
         }
 
         $request->session()->put('question_input', $input);
 
-        // $genre = $request->genre;
-        // $level = $request->level;
-        // $text = $request->text;
-        // $type = $request->type;
-        // $answer = $request->answer;
-        // $commentary = $request->commentary;
-        // $correct = $request->correct;
+        if( !empty($request->question_id) ){
+            $request->session()->put('question_id', $request->question_id);
+        }
 
-        // if( $type == '多答クイズ' ){
-        //     $correct = implode('<br />', $correct);
-        // }
-        
-        // return view('admin.question_check', ['genre' => $genre, 'level' => $level, 'text' => $text, 'type' => $type, 'answer' => $answer, 'commentary' => $commentary, 'correct' => $correct]);
         return view('admin.question_check', ['input' => $input]);
     }
 
@@ -134,27 +138,31 @@ class AdminController extends Controller
     public function question_new( Request $request ) {
         $request -> session() -> regenerateToken();
         $input = $request->session()->get('question_input');
+        $id = $request->session()->get('question_id');
 
         if( $request->has('back') ){
             // 「戻る」ボタンが押されたとき
-            return redirect()->route('admin.question_create')->withInput($input);
+            if( !!$id ){
+                return redirect()->route('admin.question_edit', $id)->withInput($input);
+            }else{
+                return redirect()->route('admin.question_create')->withInput($input);
+            }
+        
         }
 
+        if( !!$id ){
+            // Choice 削除
+            Choice::where('question_id', $id)->delete();
 
-        // $genre = $request->genre;
-        // $level = $request->level;
-        // $text = $request->text;
-        // $type = $request->type;
-        // $answer = $request->answer;
-        // $commentary = $request->commentary;
-        // $correct = $request->correct;
+            // 編集
+            $addQuestion = Question::find($id);
 
-        // if( $type == '多答クイズ' ){
-        //     $correct = explode('<br />', $correct);
-        // }
+        }else{
+            // 新規登録
+            $addQuestion = new Question;
 
-        // DB 登録
-        $addQuestion = new Question;
+        }
+
         $addQuestion->text = $input['text'];
         $addQuestion->commentary = $input['commentary'];
         $addQuestion->genre_id = Genre::where('name', $input['genre'])->first()->id;
@@ -162,6 +170,7 @@ class AdminController extends Controller
         $addQuestion->level_id = Level::where('name', $input['level'])->first()->id;
         $addQuestion->save();
 
+        // Choice 追加
         if( empty($input['answer']) ){
             $addChoice = new Choice;
             $addChoice->text = $input['correct'][0];
@@ -178,6 +187,8 @@ class AdminController extends Controller
             }
         }
         
+        $request->session()->forget('question_input');
+        $request->session()->forget('question_id');
 
         return redirect()->route('admin.question_details', $addQuestion->id);
     }
