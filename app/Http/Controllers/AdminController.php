@@ -12,11 +12,13 @@ use App\Type;
 use App\Level;
 use App\Genre;
 use App\Course;
+use Hash;
 
 class AdminController extends Controller
 {
     private $questionItems = ['genre', 'level', 'text', 'type', 'answer', 'correct', 'commentary'];
     private $giftItems = ['giftName', 'giftDescription'];
+    private $userItems = ['course', 'student_num', 'name', 'email'];
     /**
      * Create a new controller instance.
      *
@@ -317,23 +319,27 @@ class AdminController extends Controller
      */
     public function user_check( Request $request ) {
         $request -> session() -> regenerateToken();
+        $user_id = $request->user_id;
 
-        $input = $request->only($this->giftItems);
-        $request->session()->put('gift_input', $input);
+        $input = $request->only($this->userItems);
+        $request->session()->put('user_input', $input);
+        $request->session()->put('user_id', $user_id);
 
-        if( empty($request->file('giftImageFile')) ){
-            $giftImage = $request->giftImage;
-
-        }else{
-            $path = $request->file('giftImageFile')->store('public/gift');
-            $giftImage = basename($path);
+        $password = $request->password;
+        $password_check = $request->password_check;
+        if( $password != $password_check ){
+            return redirect()->back()->withInput($input)->with('flash_message', 'パスワードと再入力が一致しません');
         }
+        $request->session()->put('user_password', $password);
 
-        if( !empty($request->gift_id) ){
-            $request->session()->put('gift_id', $request->gift_id);
+        $password_len = strlen($password)-1;
+        $passwordStr = substr($password, 0, 1);
+        for( $i = 1; $i < $password_len; $i++ ){
+            $passwordStr .= '*';
         }
+        $passwordStr .= substr($password, -1, 1);
 
-        return view('admin.gift_check', ['input' => $input, 'giftImage' => $giftImage]);
+        return view('admin.user_check', ['input' => $input, 'user_id' => $user_id, 'passwordStr' => $passwordStr]);
     }
 
     /**
@@ -341,39 +347,30 @@ class AdminController extends Controller
      */
     public function user_update( Request $request ) {
         $request -> session() -> regenerateToken();
-        $input = $request->session()->get('gift_input');
-        $giftImage = $request->giftImage;
-        $id = $request->session()->get('gift_id');
+        $input = $request->session()->get('user_input');
+        $id = $request->session()->get('user_id');
+        $pass = $request->session()->get('user_password');
 
         if( $request->has('back') ){
             // 「戻る」ボタンが押されたとき
-            if( !!$id ){
-                return redirect()->route('admin.gift_edit', $id)->withInput($input);
-            }else{
-                return redirect()->route('admin.gift_create')->withInput($input);
-            }
+            return redirect()->route('admin.user_edit', $id)->withInput($input);
         
         }
 
-        if( !!$id ){
-            // 編集
-            $addGift = Gift::find($id);
-
-        }else{
-            // 新規登録
-            $addGift = new Gift;
-
-        }
-
-        $addGift->name = $input['giftName'];
-        $addGift->description = $input['giftDescription'];
-        $addGift->image_path = ($giftImage == 'noImage' ? null : $giftImage);
-        $addGift->save();
         
-        $request->session()->forget('gift_input');
-        $request->session()->forget('gift_id');
+        $editUser = User::find($id);
+        $editUser->name = $input['name'];
+        $editUser->email = $input['email'];
+        $editUser->student_num = $input['student_num'];
+        $editUser->password = Hash::make($pass);
+        $editUser->course_id = Course::where('name', $input['course'])->first()->id;
+        $editUser->save();
+        
+        $request->session()->forget('user_input');
+        $request->session()->forget('user_id');
+        $request->session()->forget('user_password');
 
-        return redirect()->route('admin.gift_details', $addGift->id);
+        return redirect()->route('admin.user_details', $editUser->id);
 
     }
 

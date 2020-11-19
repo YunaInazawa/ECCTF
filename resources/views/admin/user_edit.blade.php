@@ -19,6 +19,14 @@
                 <form method="POST" action="{{ route('admin.user_check') }}">
                     @csrf
 
+                    <!-- フラッシュメッセージ -->
+                    @if (session('flash_message'))
+                        <div class="flash_message text-center">
+                            <h4><font color="red">{{ session('flash_message') }}</font></h4>
+                            <hr>
+                        </div>
+                    @endif
+
                     <div class="form-group row">
                         <label for="course" class="col-md-4 col-form-label text-md-right input_label">{{ __('コース') }}</label>
 
@@ -84,9 +92,23 @@
                         <label for="password" class="col-md-4 col-form-label text-md-right input_label">{{ __('パスワード') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password">
 
                             @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password_check" class="col-md-4 col-form-label text-md-right input_label">{{ __('再入力') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password_check" type="password" class="form-control @error('password_check') is-invalid @enderror" name="password_check" required autocomplete="password_check">
+
+                            @error('password_check')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
