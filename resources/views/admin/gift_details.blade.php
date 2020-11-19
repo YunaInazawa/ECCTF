@@ -13,14 +13,18 @@
         <div class="card-body">
 
                 <p>
-                    <img class="fit-image" src="../images/sampleQR.png">
+                    @if( is_null($giftData->image_path) )
+                    <img class="fit-image" src="{{ asset('images/noImage.png') }}">
+                    @else
+                    <img class="fit-image" src="{{ asset('storage/gift/' . $giftData->image_path) }}">
+                    @endif
                 </p>
 
                 <p>< 景品名 ></p>
                 <p>{{ $giftData->name }}</p>
 
                 <p>< 詳細 ></p>
-                <p>{!! nl2br($giftData->discription) !!}</p>
+                <p>{!! nl2br($giftData->description) !!}</p>
 
                 <p>< 応募者 ></p>
                 <p>

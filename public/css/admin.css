@@ -12,3 +12,13 @@ tbody tr.clickable:hover td {
     color: blue;
     
 }
+
+#giftImage img {
+    height: 500px;
+    
+}
+
+.giftImageTable img {
+    height: 200px;
+    
+}

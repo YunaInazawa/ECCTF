@@ -62,10 +62,10 @@
                 </div>
 
                 <!-- GIFTS -->
-                <div class="tab-pane fade" id="nav-gift" role="tabpanel" aria-labelledby="nav-gift-tab">
-                <h1 style="margin:30px 0;">Gift List</h1>
-                <p><a href="#">GIFT 追加</a></p>
-                <table class="table table-striped">
+                <div class="tab-pane fade giftImageTable" id="nav-gift" role="tabpanel" aria-labelledby="nav-gift-tab">
+                    <h1 style="margin:30px 0;">Gift List</h1>
+                    <p><a href="{{ route('admin.gift_create') }}">GIFT 追加</a></p>
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Image</th>
@@ -76,7 +76,7 @@
                         <tbody>
                             @foreach( $giftsData as $gift )
                             <tr data-href="{{ route('admin.gift_details', $gift->id) }}"">
-                                <th scope="row">{{ $gift->image_path }}</th>
+                                <th scope="row"><img src="{{ $gift->image_path == null ? asset('images/noImage.png') : asset('storage/gift/' . $gift->image_path) }}"></th>
                                 <td>{{ $gift->name }}</td>
                                 <td>
                                     {{ $quantitys[$gift->id] == 0 ? '-' : $quantitys[$gift->id] . ' P' }}

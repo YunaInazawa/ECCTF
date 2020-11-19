@@ -1,6 +1,8 @@
 function clickDelete( giftData, applyNum ) {
+    var image = (gifts_data[i]['image_path'] == null ? 'images/noImage.png' : ('storage/gift/' + gifts_data[i]['image_path']));
+
     var hide = '<input type="hidden" name="delete_id" value="' + giftData['id'] + '">';
-    var giftImage = '<img class="fit-image" src="images/sampleQR.png">';
+    var giftImage = '<img class="fit-image" src="' + image + '">';
 
     document.getElementById('hide').innerHTML = hide;
     document.getElementById('modal-image').innerHTML = giftImage;
