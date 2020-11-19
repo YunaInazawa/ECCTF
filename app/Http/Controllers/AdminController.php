@@ -373,6 +373,17 @@ class AdminController extends Controller
         return redirect()->route('admin.user_details', $editUser->id);
 
     }
+    
+    /**
+     * 削除（ユーザ）
+     */
+    public function user_del( $id ) {
+        $userData = user::find($id);
+
+        User::find($id)->delete();
+        
+        return redirect()->route('admin.management')->with('flash_message', 'USER < # ' . $userData->id . ' : ' . $userData->name . ' ><br />削除しました');
+    }
 
     /**
      * 09_詳細画面（ユーザ）

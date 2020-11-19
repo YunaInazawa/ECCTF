@@ -39,8 +39,37 @@
             <hr>
 
             <button class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">戻る</button>
-            <button class="btn btn-primary">編集</button>
-            <button class="btn btn-primary">削除</button>
+            <button class="btn btn-primary" onclick=location.href="{{ route('admin.user_edit', $userData->id) }}">編集</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">削除</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group pt-3">
+                                        < # {{ $userData->id }} ><br />
+                                        {{ $userData->name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                            <button type="submit" class="btn btn-primary" onclick=location.href="{{ route('admin.user_delete', $userData->id) }}">削除する</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
