@@ -18,7 +18,7 @@ tbody tr.clickable:hover td {
     
 }
 
-.giftImageTable img {
+.giftImageTable img, #modal-image-admin img {
     height: 200px;
     
 }

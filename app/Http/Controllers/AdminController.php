@@ -278,6 +278,17 @@ class AdminController extends Controller
     }
 
     /**
+     * 削除（景品）
+     */
+    public function gift_del( $id ) {
+        $gift_name = Gift::find($id)->name;
+
+        Gift::find($id)->delete();
+        
+        return redirect()->route('admin.management')->with('flash_message', 'GIFT < ' . $gift_name . ' ><br />削除しました');
+    }
+
+    /**
      * 09_詳細画面（景品）
      */
     public function gift_details( $id ) {
