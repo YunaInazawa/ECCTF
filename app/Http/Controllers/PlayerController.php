@@ -11,6 +11,7 @@ use App\Choice;
 use App\Place;
 use App\Answer;
 use App\PlaceQuestion;
+use App\User;
 
 class PlayerController extends Controller
 {
@@ -90,16 +91,26 @@ class PlayerController extends Controller
         }
 
         if( $result ) {
+
+            // 正解登録
             $addAnswer = new Answer;
             $addAnswer->user_id = Auth::id();
             $addAnswer->place_id = Place::where('position_code', $code)->first()->id;
             $addAnswer->question_id = $questionId;
             $addAnswer->save();
 
+            // ポイント計算
+            $nowPoint = $this->bingoCheck();
+            if( Auth::user()->point != $nowPoint ){
+                $changeUser = User::find(Auth::id());
+                $changeUser->point = $nowPoint;
+                $changeUser->save();
+
+            }
+
             return redirect()->route('player.commentary', $questionId);
         } else {
-            return redirect()->back()
-                ->with('flash_message', '不正解です');
+            return redirect()->back()->with('flash_message', '不正解です');
         }
         
     }
@@ -127,7 +138,7 @@ class PlayerController extends Controller
         $applyGifts = Auth::user()->gifts;
         $placeDatas = array();
         $usePoint = 0;
-
+        
         foreach($places as $place){
             if( Answer::where('user_id', Auth::id())->where('place_id', $place->id)->count() ){
                 $placeDatas[] = 'ok';
@@ -222,6 +233,61 @@ class PlayerController extends Controller
             
         }
         return true;
+    }
+
+    /**
+     * ビンゴ数チェック
+     */
+    function bingoCheck() {
+        $result = 0;
+        
+        // 列
+        for( $i = 0; $i < 5; $i++ ){
+            $count = 0;
+            for( $j = 0; $j < 5; $j++ ){
+                $position_num = $i + ($j * 5);
+                $place_id = Place::where('position_num', $position_num)->first()->id;
+                $count += Answer::where('user_id', Auth::id())->where('place_id', $place_id)->count();
+
+            }
+
+            $result += $count == 5 ? 1 : 0;
+        }
+
+        // 行
+        for( $i = 0; $i < 5; $i++ ){
+            $count = 0;
+            for( $j = 0; $j < 5; $j++ ){
+                $position_num = ($i * 5) + $j;
+                $place_id = Place::where('position_num', $position_num)->first()->id;
+                $count += Answer::where('user_id', Auth::id())->where('place_id', $place_id)->count();
+
+            }
+
+            $result += $count == 5 ? 1 : 0;
+        }
+
+        // 斜め(左上から)
+        $count = 0;
+        for( $i = 0; $i < 5; $i++ ){
+            $position_num = $i * 6;
+            $place_id = Place::where('position_num', $position_num)->first()->id;
+            $count += Answer::where('user_id', Auth::id())->where('place_id', $place_id)->count();
+
+        }
+        $result += $count == 5 ? 1 : 0;
+
+        // 斜め(右上から)
+        $count = 0;
+        for( $i = 0; $i < 5; $i++ ){
+            $position_num = ($i + 1) * 4;
+            $place_id = Place::where('position_num', $position_num)->first()->id;
+            $count += Answer::where('user_id', Auth::id())->where('place_id', $place_id)->count();
+
+        }
+        $result += $count == 5 ? 1 : 0;
+
+        return $result;
     }
 
 }
