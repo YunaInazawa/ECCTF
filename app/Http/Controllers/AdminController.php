@@ -451,11 +451,11 @@ class AdminController extends Controller
         
         }
         
+        $count = 1;
         foreach( $input as $i ){
             $tmp = explode(",", $i);
             $genre = $tmp[0];
             $level = $tmp[1];
-            $count = 1;
 
             $editCard = PlaceQuestion::where('card_id', $id)->where('place_id', $count++)->first();
             $editCard->genre_id = Genre::where('name', $genre)->first()->id;

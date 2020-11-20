@@ -37,9 +37,8 @@
                                 $level = $placeData[$count]->level->name;
                             }
                             ?>
-
-                            <td name="test[]" id="id{{ $count }}" onClick="cellClick({{ $count }})" data-toggle="modal" data-target="#exampleModalCenter">
-                                <input type="hidden" name="{{ $count++ }}" value="{{ $genre }},{{ $level }}">
+                            <input type="hidden" name="{{ $count }}" value="{{ $genre }},{{ $level }}">
+                            <td name="test[]" id="id{{ $count }}" onClick="cellClick({{ $i }}, {{ $j }}, {{ $count++ }})" data-toggle="modal" data-target="#exampleModalCenter">
                                 <b>{{ $genre }}</b><br />
                                 [ {{ $level }} ]
                             </td>
@@ -88,6 +87,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title" id="modal-title">○ 列 ○ 行</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -97,7 +97,29 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group pt-3">
-                                    内容
+
+                                        <input type="hidden" id="selectCell" value="">
+
+                                        <div class="form-group">
+                                        <label for="newGenre" class="col-md-8">{{ __('ジャンル') }}</label>
+                                            <select id="newGenre" class="form-control" name="newGenre" autocomplete="newGenre">
+                                                <option value="">選択してください</option>
+                                                @foreach( $genresData as $data )
+                                                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                        <label for="newLevel" class="col-md-8">{{ __('レベル') }}</label>
+                                            <select id="newLevel" class="form-control" name="newLevel" autocomplete="newLevel">
+                                                <option value="">選択してください</option>
+                                                @foreach( $levelsData as $data )
+                                                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

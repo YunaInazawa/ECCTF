@@ -98,17 +98,34 @@ function clearImage() {
   
 }
 
-function cellClick(num, genresData, levelsData) {
-  alert(document.getElementById('id'+num).innerText);
-  alert(document.getElementsByName(num)[0].value);
+function cellClick(row, col, num) {
+
+  // hidden 取得
+  var hideInfo = document.getElementsByName(num)[0].value.split(',');
+  var genre = hideInfo[0];
+  var level = hideInfo[1];
 
   // modal の内容を変更
+  document.getElementById('modal-title').innerText = (col+1) + ' 列 ' + (row+1) + ' 行';
+  document.getElementById('newGenre').value = genre;
+  document.getElementById('newLevel').value = level;
+  document.getElementById('selectCell').value = num;
 
 }
 
 function cellChange() {
-  $('#exampleModalCenter').modal('hide');
-  
+
+  // データを取得
+  var num = document.getElementById('selectCell').value;
+  var genre = document.getElementById('newGenre').value;
+  var level = document.getElementById('newLevel').value;
+
+  var cellStr = '<b>' + genre + '</b><br />\n[ ' + level + ' ]';
+  var hideStr = genre + ',' + level;
+
   // セルとhiddenを変更
+  document.getElementById('id'+num).innerHTML = cellStr;
+  document.getElementsByName(num)[0].value = hideStr;
+  $('#exampleModalCenter').modal('hide');
 
 }
