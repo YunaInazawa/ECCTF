@@ -12,24 +12,30 @@ class PlacesTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/places.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $rooms = 
-        [
-            '1301', '1302', '1303', '1304', '1305', 
-            '1306', '1307', '1308', '1309', '1401', 
-            '2301', '2302', '2303', '2501', '2502', 
-            '2503', '2504', '2505', '3201', '3202', 
-            '3301', '3302', '3701', '3702', '3703'
-        ];
+        $list = [];
+        
+        foreach( $file as $line ){
+            $positionNum = mb_convert_encoding((int)$line[0], 'UTF-8', 'SJIS');
+            $roomName = mb_convert_encoding($line[1], 'UTF-8', 'SJIS');
+            $positionCode = mb_convert_encoding($line[2], 'UTF-8', 'SJIS');
 
-        for( $i = 0; $i < count($rooms); $i++ ){
-            DB::table('places')->insert([
-                'position_num' => $i,
-                'position_code' => strtoupper(substr(base_convert(md5(uniqid()), 16, 36), 0, 10)), 
-                'room_name' => $rooms[$i],
+            $list[] = [
+                'position_num' => $positionNum,
+                'position_code' => $positionCode, 
+                'room_name' => $roomName,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('places')->insert($list);
     }
 }

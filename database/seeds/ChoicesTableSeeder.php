@@ -59,18 +59,36 @@ class ChoicesTableSeeder extends Seeder
         //     ]);
         // }
 
-        // テストデータ
-        $question_id = Question::where('text', 'Q.TEST : TEXT')->first()->id;
-        for( $i = 1; $i <= 3; $i++ ){
-            DB::table('choices')->insert([
-                'text' => 'Q.TEST : ANSWER' . $i,
-                'is_correct' => true,
+        // 例題
+        $file = new SplFileObject('database/csvs/choices.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
+        $now = Carbon::now();
+        $list = [];
+        
+        foreach( $file as $line ){
+            $Qtext = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
+            $text = mb_convert_encoding($line[1], 'UTF-8', 'SJIS');
+            $isCorrect = mb_convert_encoding($line[2], 'UTF-8', 'SJIS');
+            
+            $question_id = Question::where('text', $Qtext)->first()->id;
+        
+            $list[] = [
+                'text' => $text,
+                'is_correct' => $isCorrect,
                 'question_id' => $question_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
 
+        DB::table('choices')->insert($list);
+
+        // テストデータ
         for( $i = 1; $i <= 54; $i++ ){
             $question = Question::where('text', 'Q.' . $i . ' : TEXT')->first();
 

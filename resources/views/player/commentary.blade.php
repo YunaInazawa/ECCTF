@@ -10,7 +10,7 @@
         <div class="card-body">
             <form action="{{ route('player.my_page') }}">
 
-                <h4 class="card-text">{{ $questionData->text }}</h4>
+                <h4 class="card-text">{!! nl2br($questionData->text) !!}</h4>
                 <hr>
                 <p>< 正解 ><br />{!! nl2br($correct) !!}</p>
                 <hr>

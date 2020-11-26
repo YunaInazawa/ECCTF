@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('student_num');
+            $table->string('student_num');
             $table->string('password');
             $table->boolean('is_admin')->default(false);
             $table->foreignId('course_id')

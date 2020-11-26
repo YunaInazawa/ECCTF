@@ -12,18 +12,30 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/courses.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $names = ['IE1A', 'IE2A', 'IE3A', 'IE4A', 'SE1A', 'SE2A', 'SE3A', '...'];
-        $cards = ['IT下級生用', 'IT下級生用', 'IT上級生用', 'IT上級生用', 'IT下級生用', 'IT下級生用', 'IT上級生用', 'その他'];
+        $list = [];
+        
+        foreach( $file as $line ){
+            $name = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
+            $cardName = mb_convert_encoding($line[1], 'UTF-8', 'SJIS');
 
-        for( $i = 0; $i < count($names); $i++ ){
-            $card_id = DB::table('cards')->where('name', $cards[$i])->first()->id;
-            DB::table('courses')->insert([
-                'name' => $names[$i],
+            $card_id = DB::table('cards')->where('name', $cardName)->first()->id;
+            
+            $list[] = [
+                'name' => $name,
                 'card_id' => $card_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('courses')->insert($list);
     }
 }

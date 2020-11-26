@@ -12,25 +12,38 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/users.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $names = ['admin', 'hoge'];
-        $emails = ['admin@gmail.com', 'hoge@gmail.com'];
-        $nums = ['2170000', '2170001'];
-        $passwords = ['adminadmin', 'password'];
-        $is_admins = [true, false];
-        $courses = ['...', 'IE3A'];
-        for( $i = 0; $i < count($names); $i++ ){
-            $course_id = DB::table('courses')->where('name', $courses[$i])->first()->id;
-            DB::table('users')->insert([
-                'name' => $names[$i],
-                'email' => $emails[$i],
-                'student_num' => $nums[$i],
-                'password' => Hash::make($passwords[$i]),
-                'is_admin' => $is_admins[$i],
+        $list = [];
+        
+        foreach( $file as $line ){
+            $name = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
+            $email = mb_convert_encoding($line[1], 'UTF-8', 'SJIS');
+            $studentNum = mb_convert_encoding($line[2], 'UTF-8', 'SJIS');
+            $password = mb_convert_encoding($line[3], 'UTF-8', 'SJIS');
+            $isAdmin = mb_convert_encoding($line[4], 'UTF-8', 'SJIS');
+            $courseName = mb_convert_encoding($line[5], 'UTF-8', 'SJIS');
+
+            $course_id = DB::table('courses')->where('name', $courseName)->first()->id;
+            
+            $list[] = [
+                'name' => $name,
+                'email' => $email,
+                'student_num' => $studentNum,
+                'password' => Hash::make($password),
+                'is_admin' => $isAdmin,
                 'course_id' => $course_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('users')->insert($list);
     }
 }

@@ -12,15 +12,26 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/types.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $names = ['択一クイズ', '二択クイズ', '多答クイズ', '穴抜けコード', '一問一答'];
+        $list = [];
+        
+        foreach( $file as $line ){
+            $name = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
 
-        foreach( $names as $name ){
-            DB::table('types')->insert([
+            $list[] = [
                 'name' => $name,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('types')->insert($list);
     }
 }

@@ -33,19 +33,40 @@ class QuestionsTableSeeder extends Seeder
         //     ]);
         // }
 
-        // テストデータ
-        $type_id = DB::table('types')->where('name', '択一クイズ')->first()->id;
-        $level_id = DB::table('levels')->where('name', 'TEST')->first()->id;
-        $genre_id = DB::table('genres')->where('name', 'TEST')->first()->id;
-        DB::table('questions')->insert([
-            'text' => 'Q.TEST : TEXT',
-            'type_id' => $type_id,
-            'level_id' => $level_id,
-            'genre_id' => $genre_id,
-            'created_at' => $now, 
-            'updated_at' => $now,
-        ]);
+        // 例題
+        $file = new SplFileObject('database/csvs/questions.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
+        $now = Carbon::now();
+        $list = [];
+        
+        foreach( $file as $line ){
+            $text = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
+            $typeName = mb_convert_encoding($line[1], 'UTF-8', 'SJIS');
+            $levelName = mb_convert_encoding($line[2], 'UTF-8', 'SJIS');
+            $genreName = mb_convert_encoding($line[3], 'UTF-8', 'SJIS');
 
+            $type_id = DB::table('types')->where('name', $typeName)->first()->id;
+            $level_id = DB::table('levels')->where('name', $levelName)->first()->id;
+            $genre_id = DB::table('genres')->where('name', $genreName)->first()->id;
+        
+            $list[] = [
+                'text' => $text,
+                'type_id' => $type_id,
+                'level_id' => $level_id,
+                'genre_id' => $genre_id,
+                'created_at' => $now, 
+                'updated_at' => $now,
+            ];
+        }
+
+        DB::table('questions')->insert($list);
+
+        // テストデータ
         $genres = ['学校/全体', '学校/先生', '学校/生徒', '勉学/PC基礎', '勉学/国家試験', '勉学/プログラミング'];
         $levels = ['共通', '上級', '下級'];
         $types = ['択一クイズ', '二択クイズ', '多答クイズ', '穴抜けコード', '一問一答'];

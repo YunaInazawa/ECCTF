@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                    {{ $questionData->text }}
+                    {!! nl2br($questionData->text) !!}
                 </div>
 
                 <div class="form-group row">

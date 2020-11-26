@@ -12,15 +12,26 @@ class LevelsTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/levels.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $names = ['TEST', '共通', '上級', '下級'];
+        $list = [];
+        
+        foreach( $file as $line ){
+            $name = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
 
-        foreach( $names as $name ){
-            DB::table('levels')->insert([
+            $list[] = [
                 'name' => $name,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('levels')->insert($list);
     }
 }

@@ -12,15 +12,25 @@ class CardsTableSeeder extends Seeder
      */
     public function run()
     {
+        $file = new SplFileObject('database/csvs/cards.csv');
+        $file->setFlags(
+            \SplFileObject::READ_CSV | 
+            \SplFileObject::READ_AHEAD | 
+            \SplFileObject::SKIP_EMPTY | 
+            \SplFileObject::DROP_NEW_LINE
+        );
         $now = Carbon::now();
-        $names = ['IT上級生用', 'IT下級生用', 'GAME上級生用', 'GAME下級生用', 'その他'];
-
-        foreach( $names as $name ){
-            DB::table('cards')->insert([
+        $list = [];
+        
+        foreach( $file as $line ){
+            $name = mb_convert_encoding($line[0], 'UTF-8', 'SJIS');
+            $list[] = [
                 'name' => $name,
                 'created_at' => $now, 
                 'updated_at' => $now,
-            ]);
+            ];
         }
+
+        DB::table('cards')->insert($list);
     }
 }
