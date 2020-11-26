@@ -54,3 +54,7 @@ Route::get('/card_details/{id}', 'AdminController@card_details')->name('admin.ca
 Route::get('/card_edit/{id}', 'AdminController@card_edit')->name('admin.card_edit');
 Route::post('/card_check', 'AdminController@card_check')->name('admin.card_check');
 Route::post('/card_update', 'AdminController@card_update')->name('admin.card_update');
+
+Route::get('/room_details', 'AdminController@room_details')->name('admin.room_details');
+Route::get('/room_edit', 'AdminController@room_edit')->name('admin.room_edit');
+

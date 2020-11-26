@@ -114,6 +114,7 @@
                 <!-- CARDS -->
                 <div class="tab-pane fade" id="nav-card" role="tabpanel" aria-labelledby="nav-card-tab">
                 <h1 style="margin:30px 0;">Card List</h1>
+                <p><a href="{{ route('admin.room_details') }}">--- ROOM ---</a></p>
                 <table class="table table-striped">
                         <thead>
                             <tr>

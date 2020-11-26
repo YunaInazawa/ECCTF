@@ -14,6 +14,7 @@ use App\Genre;
 use App\Course;
 use App\Card;
 use App\PlaceQuestion;
+use App\Place;
 use Hash;
 
 class AdminController extends Controller
@@ -478,6 +479,28 @@ class AdminController extends Controller
         $placeData = PlaceQuestion::where('card_id', $id)->orderBy('place_id')->get();
         
         return view('admin.card_details', ['cardData' => $cardData, 'placeData' => $placeData]);
+    }
+
+    /**
+     * ルーム編成ページ
+     */
+
+    /**
+     * 07_編集画面（ルーム）
+     */
+    public function room_edit() {
+        $placeData = Place::all();
+        
+        return view('admin.room_edit', ['placeData' => $placeData]);
+    }
+    
+    /**
+     * 09_詳細画面（ルーム）
+     */
+    public function room_details() {
+        $placeData = Place::all();
+        
+        return view('admin.room_details', ['placeData' => $placeData]);
     }
 
     function checkCorrect($type, $a, $correct) {
