@@ -55,18 +55,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row input_item">
-                        <div class="col-md-6 offset-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label input_label" for="remember">
-                                    {{ __('保存する') }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4 input_btn">
                             <button type="submit" class="btn btn-primary">
@@ -74,13 +62,6 @@
                             </button>
 
  
-                        </div>
-                        <div class="col-lg-12">
-                                @if (Route::has('password.request'))
-                                <a class="" href="{{ route('password.request') }}">
-                                    {{ __('パスワードを忘れた') }}
-                                </a>
-                            @endif
                         </div>
                     </div>
                     
