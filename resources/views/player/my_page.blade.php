@@ -24,7 +24,7 @@
         </div>
                 
         <div class="form-group">
-            <h1>リーーーーチ☆</h1>
+            <h1>ＢＩＮＧＯ</h1>
         </div>
 
         <div class="form-group col-md-8">
