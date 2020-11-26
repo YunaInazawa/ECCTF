@@ -101,7 +101,7 @@ $course_list = ['IE3A', 'IE4A'];
                 </div>
 
                 <div class="form-group row input_item">
-                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right input_label">{{ __('再入力') }}</label>
+                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right input_label">{{ __('パスワード再入力') }}</label>
 
                     <div class="col-md-6">
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
