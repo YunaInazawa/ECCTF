@@ -45,3 +45,8 @@ tbody tr.clickable:hover td {
 
     border: solid 2px var(--hatuyuki);
 }
+
+.position_code {
+    font-size: 12px;
+
+}
