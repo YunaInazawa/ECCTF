@@ -495,6 +495,21 @@ class AdminController extends Controller
     }
     
     /**
+     * 08_確認画面（ルーム）
+     */
+    public function room_check( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $card_id = $request->card_id;
+        $card_name = $request->card_name;
+
+        $input = $request->only($this->cardItems);
+        $request->session()->put('card_input', $input);
+        $request->session()->put('card_id', $card_id);
+
+        return view('admin.room_check', ['input' => $input, 'card_id' => $card_id, 'card_name' => $card_name]);
+    }
+    
+    /**
      * 09_詳細画面（ルーム）
      */
     public function room_details() {

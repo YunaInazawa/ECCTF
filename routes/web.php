@@ -57,4 +57,4 @@ Route::post('/card_update', 'AdminController@card_update')->name('admin.card_upd
 
 Route::get('/room_details', 'AdminController@room_details')->name('admin.room_details');
 Route::get('/room_edit', 'AdminController@room_edit')->name('admin.room_edit');
-
+Route::post('/room_check', 'AdminController@room_check')->name('admin.room_check');

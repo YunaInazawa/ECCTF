@@ -129,3 +129,30 @@ function cellChange() {
   $('#exampleModalCenter').modal('hide');
 
 }
+
+function cellClickRoom(row, col, num) {
+
+  // hidden 取得
+  var room = document.getElementsByName(num)[0].value;
+
+  // modal の内容を変更
+  document.getElementById('modal-title').innerText = (col+1) + ' 列 ' + (row+1) + ' 行';
+  document.getElementById('newRoom').value = room;
+  document.getElementById('selectCell').value = num;
+
+}
+
+function cellChangeRoom() {
+
+  // データを取得
+  var num = document.getElementById('selectCell').value;
+  var room = document.getElementById('newRoom').value;
+
+  var cellStr = '<b>' + room + '</b>';
+
+  // セルとhiddenを変更
+  document.getElementById('id'+num).innerHTML = cellStr;
+  document.getElementsByName(num)[0].value = room;
+  $('#exampleModalCenter').modal('hide');
+
+}
