@@ -499,14 +499,37 @@ class AdminController extends Controller
      */
     public function room_check( Request $request ) {
         $request -> session() -> regenerateToken();
-        $card_id = $request->card_id;
-        $card_name = $request->card_name;
 
         $input = $request->only($this->cardItems);
-        $request->session()->put('card_input', $input);
-        $request->session()->put('card_id', $card_id);
+        $request->session()->put('room_input', $input);
 
-        return view('admin.room_check', ['input' => $input, 'card_id' => $card_id, 'card_name' => $card_name]);
+        return view('admin.room_check', ['input' => $input]);
+    }
+
+    /**
+     * DB 登録（ルーム）
+     */
+    public function room_update( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $input = $request->session()->get('room_input');
+
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            return redirect()->route('admin.room_edit')->withInput($input);
+        
+        }
+        
+        foreach( $this->cardItems as $num ){
+
+            $editRoom = Place::where('position_num', $num)->first();
+            $editRoom->room_name = $input[$num];
+            $editRoom->save();
+        }
+        
+        $request->session()->forget('room_input');
+
+        return redirect()->route('admin.room_details');
+
     }
     
     /**
