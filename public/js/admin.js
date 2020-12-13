@@ -156,3 +156,36 @@ function cellChangeRoom() {
   $('#exampleModalCenter').modal('hide');
 
 }
+
+/**
+ * card_details 
+ */
+function clickCellShowQuestions( num ) {
+  var tmp = questions[num];
+  var str = '';
+
+  tmp.forEach(element => {
+    str += element.text + '<br />';
+  });
+
+  document.getElementById('showQuestions').innerHTML = str;
+  
+}
+
+$(function(){
+  tr_default(".defaultCell");
+  $(".defaultCell").click(function(){
+   tr_default(".defaultCell");
+   tr_click($(this));
+  });
+ });
+ 
+ function tr_default(tblID){
+  // var vTR = tblID + " td";
+  // $(vTR).css("background-color","#F4A358");
+  $(tblID).css("background-color","#F4A358");
+ }
+ 
+ function tr_click(trID){
+  trID.css("background-color","#E77433");
+ }

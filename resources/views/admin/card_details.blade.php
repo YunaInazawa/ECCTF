@@ -2,6 +2,10 @@
 
 @section('title', 'card_details')
 
+@section('js')
+<script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
 @section('stylesheet')
 <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 @endsection
@@ -16,11 +20,15 @@
 
         <div class="form-group">
             <div class="bingo">
-                <table class="table table-bordered">
+                <table id="bingoTable" class="table table-bordered">
                     
                     <tr>
                         @for( $i = 0; $i < count($placeData); $i++ )
-                            <td>
+                            @if( $questions[$placeData[$i]->place->position_num] == 'nothing' )
+                            <td style="background-color: red;">
+                            @else
+                            <td class="defaultCell" onClick="clickCellShowQuestions({{ $placeData[$i]->place->position_num }})">
+                            @endif
                                 <b>{{ $placeData[$i]->genre->name }}</b><br />
                                 [ {{ $placeData[$i]->level->name }} ]
                             </td>
@@ -58,8 +66,12 @@
                     <div class="card-body">
                         < 対象クラス ><br />
                         @foreach( $cardData->courses as $course )
-                        {{ $course->name }}<br />
+                        {{ $course->name }} 
                         @endforeach
+                        <br /><br />
+
+                        < 出題 QUESTION 一覧 >
+                        <div id="showQuestions"></div>
 
                     </div>
                 </div>
@@ -69,4 +81,8 @@
     </form>
 
 </div>
+
+<script type="text/javascript">
+var questions = @json($questions);
+</script>
 @endsection

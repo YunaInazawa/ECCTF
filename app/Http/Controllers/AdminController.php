@@ -477,8 +477,16 @@ class AdminController extends Controller
     public function card_details( $id ) {
         $cardData = Card::find($id);
         $placeData = PlaceQuestion::where('card_id', $id)->orderBy('place_id')->get();
+        $questions = array();
+
+        foreach( $placeData as $data ){
+            $questions[$data->place->position_num] = Question::where('genre_id', $data->genre_id)->where('level_id', $data->level_id)->get();
+            if( count($questions[$data->place->position_num]) == 0 ){
+                $questions[$data->place->position_num] = 'nothing';
+            }
+        }
         
-        return view('admin.card_details', ['cardData' => $cardData, 'placeData' => $placeData]);
+        return view('admin.card_details', ['cardData' => $cardData, 'placeData' => $placeData, 'questions' => $questions]);
     }
 
     /**
