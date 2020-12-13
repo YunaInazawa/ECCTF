@@ -46,7 +46,7 @@
                     <div id="giftDescription" class="form-group"></div>
 
                     <div class="form-group row">
-                        <div class="offset-4 col-md-3">
+                        <div class="col-md-10">
                             <select class="form-control" id="apply_num" name="apply_num" onChange="changeNum()">
                                 @if( $pointNow == 0 )
                                     <option value="0">0 P</option>
@@ -57,7 +57,7 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="col-md-5 text-left">
+                        <div class="col-md-2">
                             <div id="hide"></div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" <?php if($pointNow == 0){ echo 'disabled'; } ?>>
                                 応募

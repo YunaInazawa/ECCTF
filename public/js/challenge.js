@@ -12,7 +12,7 @@ function changeGift( gifts_data ) {
 
                 var description = gifts_data[i]['description'] == null ? '' : gifts_data[i]['description'];
                 var giftId = '<input type="hidden" name="gift_id" value="' + gifts_data[i]['id'] + '">';
-                var giftImage = '<img style="height: 500px" class="fit-image" src="' + image + '">';
+                var giftImage = '<img class="fit-image" src="' + image + '">';
                 var giftImageModal = '<img style="height: 200px" class="fit-image" src="' + image + '">';
                 var giftName = '<h1>' + gifts_data[i]['name'] + '</h1>';
                 var giftDescription = '<p>' + description + '</p>'
