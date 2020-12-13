@@ -42,16 +42,23 @@
                     
                         <tr>
                         @for( $i = 0; $i < count($placeDatas); $i++ )
+
+                            @if( $placeDatas[$i] == 'ok' )
+                            <td><div class="sei"><img src="{{ asset('images/sei.png') }}"></div></td>
+                            @else
                             <td>{{ $placeDatas[$i] }}</td>
+                            @endif
+
                             @if( $i % 5 == 4 && $i != 24 )
                             </tr>
                             <tr>
                             @endif
+
                         @endfor
                     </tr>
                    
                 </table>
-                <img class="title_ic" src="images/momizi_big.png">
+                <img class="title_ic bingo_momizi" src="images/momizi_big.png">
             </div>
         </div>
 

@@ -28,32 +28,54 @@
     top: -10px;
   }
 
-  .bingo{
+  /* .bingo{
     padding: 20px;
     margin: 2em 0;
     background: var(--koharu);
     box-shadow: 0px 0px 0px 10px var(--koharu);
     border: dashed 2px white;
+  } */
+
+  .bingo{
+    width: 80%;
+    height: 400px;
+    padding: 20px;
+    margin: 2em auto;
+    background: var(--koharu);
+    box-shadow: 0px 0px 0px 10px var(--koharu);
+    border: dashed 2px white;
   }
   
-  .bingo table{
+  /* .bingo table{
     margin: 0;
-  }
+  } */
+
+  .bingo table{
+    table-layout: fixed;
+    height: 350px;
+    margin: 0;
+}
   
   .bingo table tr td{
-    height: 60px;
+    height: 50px;
     padding: 0;
     
     border: solid 2px var(--hatuyuki);
   }
+
   .bingo table tr{
     width: 10px
   }
-  .bingo img{
+  .bingo_momizi{
     position: absolute;
     transform: rotateY( 180deg );
     top: 317px;
     width: 70px;
     left: 335px;
     height: 65px;
+  }
+
+  .sei img {
+    width: 100%;
+    object-fit: contain;
   }
