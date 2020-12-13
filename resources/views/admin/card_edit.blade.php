@@ -53,7 +53,7 @@
 
         <div class="form-group row">
             <div class="col-md-4 offset-md-2 text-md-right input_btn">
-                <button type="button" class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">
+                <button type="button" class="btn btn-primary" onclick=location.href="{{ route('admin.card_details', $cardData->id) }}">
                     {{ __('戻る') }}
                 </button>
 
