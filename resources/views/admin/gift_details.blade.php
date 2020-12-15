@@ -13,13 +13,15 @@
     <div class="card text-center">
         <div class="card-body">
 
-            <p>
-                @if( is_null($giftData->image_path) )
-                <img class="fit-image" src="{{ asset('images/noImage.png') }}">
-                @else
-                <img class="fit-image" src="{{ asset('storage/gift/' . $giftData->image_path) }}">
-                @endif
-            </p>
+            <div class="col-md-6 offset-3">
+                <p>
+                    @if( is_null($giftData->image_path) )
+                    <img class="fit-image giftDetailsImgCenter" src="{{ asset('images/noImage.png') }}">
+                    @else
+                    <img class="fit-image giftDetailsImgCenter" src="{{ asset('storage/gift/' . $giftData->image_path) }}">
+                    @endif
+                </p>
+            </div>
 
             <p>< 景品名 ></p>
             <p>{{ $giftData->name }}</p>
