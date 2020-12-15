@@ -24,6 +24,8 @@ Route::get('/question/{code}', 'PlayerController@question')->name('player.questi
 Route::post('/check', 'PlayerController@check')->name('player.check');
 Route::get('/commentary/{id}', 'PlayerController@commentary')->name('player.commentary');
 Route::get('/my_page', 'PlayerController@my_page')->name('player.my_page');
+Route::get('/pass_reset', 'PlayerController@password_reset')->name('player.pass_reset');
+Route::post('/pass_update', 'PlayerController@password_update')->name('player.pass_update');
 Route::post('/delete', 'PlayerController@delete')->name('player.delete');
 Route::get('/challenge', 'PlayerController@challenge')->name('player.challenge');
 Route::post('/apply', 'PlayerController@apply')->name('player.apply');

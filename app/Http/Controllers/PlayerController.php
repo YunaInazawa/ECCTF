@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Hash;
 use App\Gift;
 use App\UserGift;
 use App\Question;
@@ -154,6 +155,33 @@ class PlayerController extends Controller
         $pointNow = (Auth::user()->point) - $usePoint;
         
         return view('player.my_page', ['applyGifts' => $applyGifts, 'pointNow' => $pointNow, 'placeDatas' => $placeDatas]);
+    }
+
+    /**
+     * パスワード変更ページ
+     */
+    public function password_reset() {
+
+        return view('player.password_edit');
+    }
+
+    /**
+     * パスワード変更 / DB 登録
+     */
+    public function password_update( Request $request ) {
+        $request -> session() -> regenerateToken();
+        $new_pass = $request->password;
+        
+        if( $new_pass != $request->password_check ){
+            return redirect()->route('player.pass_reset')->with('flash_message', 'パスワードが一致しません');    
+        }
+
+        // DB 登録
+        $editUser = Auth::user();
+        $editUser->password = Hash::make($new_pass);
+        $editUser->save();
+
+        return redirect()->route('player.my_page')->with('flash_message', 'パスワードを変更しました');
     }
 
     /**

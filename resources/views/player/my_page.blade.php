@@ -73,7 +73,8 @@
     <div class="card text-center my-5">
         <div class="card-body">
             [ {{ Auth::user()->student_num }} ]<br />
-            < {{ Auth::user()->course->name }} > {{ Auth::user()->name }}
+            < {{ Auth::user()->course->name }} > {{ Auth::user()->name }}<br />
+            <a href="{{ route('player.pass_reset') }}">パスワード変更</a>
 
         </div>
     </div>
