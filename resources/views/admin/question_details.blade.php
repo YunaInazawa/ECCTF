@@ -9,9 +9,19 @@
 
         <div class="card-body">
 
+            <!-- ジャンル -->
+            <p>< ジャンル : レベル ></p>
+            <p>{{ $questionData->genre->name }} : {{ $questionData->level->name }}</p>
+            <hr>
+
             <!-- 問題文 -->
             <p>< 問題文 ></p>
             <p>{{ $questionData->text }}</p>
+            <hr>
+
+            <!-- 回答タイプ -->
+            <p>< 回答タイプ ></p>
+            <p>{{ $questionData->type->name }}</p>
             <hr>
 
             <!-- 選択肢 -->
