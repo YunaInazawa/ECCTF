@@ -1,10 +1,10 @@
 thead th {
-    background: #fa940e;
+    background: var(--tyu);
     color: #fff;
 }
 
 tbody tr.clickable:hover td {
-    background: #ffbd43;
+    background: var(--sasuga);
     cursor: pointer;
 }
 
@@ -28,8 +28,8 @@ tbody tr.clickable:hover td {
     height: 500px;
     padding: 20px;
     margin: 2em auto;
-    background: var(--koharu);
-    box-shadow: 0px 0px 0px 10px var(--koharu);
+    background: var(--yukinohana);
+    box-shadow: 0px 0px 0px 10px var(--yukinohana);
     border: dashed 2px white;
 }
 
@@ -43,7 +43,7 @@ tbody tr.clickable:hover td {
     padding: auto 0;
     height: 50px;
 
-    border: solid 2px var(--hatuyuki);
+    border: solid 2px var(--tyu);
 }
 
 .position_code {

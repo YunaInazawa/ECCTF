@@ -21,7 +21,7 @@
 </div>
     <div class="col-md-8">
         <div class="card">
-            <div class="card_head"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>ロ</span>グイン</span></div>
+            <div class="card_head"><img class="title_ic" src="images/yukidaruma.png"><span class="title"><span>ロ</span>グイン</span></div>
 
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">

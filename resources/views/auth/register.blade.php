@@ -5,7 +5,7 @@ $course_list = ['IE3A', 'IE4A'];
 @extends('layouts.app_header')
 
 @section('content')
-<div class="momizi_drop" col-lg-12">
+<div class="momizi_drop col-lg-12">
     <div class="momizi1 momizi"></div>
     <div class="momizi2 momizi"></div>
     <div class="momizi3 momizi"></div>
@@ -19,7 +19,7 @@ $course_list = ['IE3A', 'IE4A'];
 </div>
 <div class="col-md-8">
     <div class="card">
-        <div class="card_head"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>参</span>加登録</span></div>
+        <div class="card_head"><img class="title_ic" src="images/yukidaruma.png"><span class="title"><span>参</span>加登録</span></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('register') }}">

@@ -58,7 +58,7 @@
                     </tr>
                    
                 </table>
-                <img class="title_ic bingo_momizi" src="images/momizi_big.png">
+                <img class="title_ic bingo_momizi" src="images/yukidaruma.png">
             </div>
         </div>
 
