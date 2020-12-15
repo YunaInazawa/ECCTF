@@ -337,21 +337,7 @@ class AdminController extends Controller
         $request->session()->put('user_input', $input);
         $request->session()->put('user_id', $user_id);
 
-        $password = $request->password;
-        $password_check = $request->password_check;
-        if( $password != $password_check ){
-            return redirect()->back()->withInput($input)->with('flash_message', 'パスワードと再入力が一致しません');
-        }
-        $request->session()->put('user_password', $password);
-
-        $password_len = strlen($password)-1;
-        $passwordStr = substr($password, 0, 1);
-        for( $i = 1; $i < $password_len; $i++ ){
-            $passwordStr .= '*';
-        }
-        $passwordStr .= substr($password, -1, 1);
-
-        return view('admin.user_check', ['input' => $input, 'user_id' => $user_id, 'passwordStr' => $passwordStr]);
+        return view('admin.user_check', ['input' => $input, 'user_id' => $user_id]);
     }
 
     /**
@@ -361,7 +347,6 @@ class AdminController extends Controller
         $request -> session() -> regenerateToken();
         $input = $request->session()->get('user_input');
         $id = $request->session()->get('user_id');
-        $pass = $request->session()->get('user_password');
 
         if( $request->has('back') ){
             // 「戻る」ボタンが押されたとき
@@ -374,13 +359,11 @@ class AdminController extends Controller
         $editUser->name = $input['name'];
         $editUser->email = $input['email'];
         $editUser->student_num = $input['student_num'];
-        $editUser->password = Hash::make($pass);
         $editUser->course_id = Course::where('name', $input['course'])->first()->id;
         $editUser->save();
         
         $request->session()->forget('user_input');
         $request->session()->forget('user_id');
-        $request->session()->forget('user_password');
 
         return redirect()->route('admin.user_details', $editUser->id);
 

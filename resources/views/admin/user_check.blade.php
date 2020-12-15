@@ -26,11 +26,6 @@
                 <p>{{ $input['email'] }}</p>
                 <hr>
 
-                <!-- パスワード -->
-                <p>< パスワード ></p>
-                <p>{{ $passwordStr }}</p>
-                <hr>
-
                 <button type="submit" name="back" class="btn btn-primary">戻る</button>
                 <button type="submit" class="btn btn-primary">登録</button>
 
