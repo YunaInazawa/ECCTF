@@ -368,12 +368,25 @@ class AdminController extends Controller
         return redirect()->route('admin.user_details', $editUser->id);
 
     }
+
+    /**
+     * パスワード変更（ユーザ）
+     */
+    public function user_password_update( $id ) {
+        $userData = User::find($id);
+        $new_pass = mb_strtolower($userData->course->name . $userData->student_num);
+        
+        $userData->password = Hash::make($new_pass);
+        $userData->save();
+        
+        return redirect()->route('admin.user_details', $userData->id)->with('flash_message', 'パスワードを「' . $new_pass . '」に変更しました');
+    }
     
     /**
      * 削除（ユーザ）
      */
     public function user_del( $id ) {
-        $userData = user::find($id);
+        $userData = User::find($id);
 
         User::find($id)->delete();
         
