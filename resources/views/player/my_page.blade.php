@@ -112,15 +112,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div id="modal-image" class="col-md-6"></div>
-                                        <div class="form-group row pt-3">
-                                            <label for="inputDeleteNum" class="col-md-10 col-form-label text-left"><h5>削除数 :</h5></label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" id="delete_num" name="delete_num"></select>
-                                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div id="modal-image" class="col-md-6"></div>
+                                    <div class="form-group col-md-6 row pt-3">
+                                        <label for="inputDeleteNum" class="col-md-10 col-form-label text-left"><h5>削除数 :</h5></label>
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="delete_num" name="delete_num"></select>
                                         </div>
                                     </div>
                                 </div>
