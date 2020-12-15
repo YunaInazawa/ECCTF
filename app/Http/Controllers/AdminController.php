@@ -17,6 +17,9 @@ use App\PlaceQuestion;
 use App\Place;
 use Hash;
 
+use App\Mail\PasswordResetEmail;
+use Mail;
+
 class AdminController extends Controller
 {
     private $questionItems = ['genre', 'level', 'text', 'type', 'answer', 'correct', 'commentary'];
@@ -378,6 +381,12 @@ class AdminController extends Controller
         
         $userData->password = Hash::make($new_pass);
         $userData->save();
+
+        // メール送信
+        $data['name'] = $userData->name;
+        $data['email'] = $userData->email;
+        $data['new_pass'] = $new_pass;
+        Mail::to($data['email'])->send(new PasswordResetEmail($data));
         
         return redirect()->route('admin.user_details', $userData->id)->with('flash_message', 'パスワードを「' . $new_pass . '」に変更しました');
     }
