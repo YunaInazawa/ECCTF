@@ -15,7 +15,7 @@
 /*----------------------------------
  1.カラーコード表
  ---------------------------------*/
-:root{
+ :root{
   --momizi:    #E2451E;
   --kaede:     #E77433;
   --momi:      #BD3528;
@@ -30,6 +30,25 @@
   --zyuzitu:   #FADC34;
   --honen:     #765E36;
 
+  --kangyou:      #cfdae1;
+  --saeru:        #a8bacf;
+  --kannouti:     #869fbe;
+  --robai:        #f7f09e;
+  --kessyo:       #e9ecee;
+  --ketuzitu:     #8f8b61;
+  --kanburi:      #b4b1a8;
+  --itegumo:      #8f8b79;
+  --kansizimi:    #615c42;
+
+  --setugen:      rgb(232, 240, 235);
+  --harunoasioto: #dad2e4;
+  --yukinohana:   #bbcfe4;
+  --yukiakari:    #c7d1dc;
+  --daikantamago: #e9e4da;
+  --zyuhyo:       #d6dae0;
+  --tyu:          rgb(64, 92, 125);
+  --isizue:       #596b80;
+  --sasuga:       #a0a79c;
 }
 
 
@@ -38,16 +57,19 @@
  2.共通ヘッダーの設定
  ---------------------------------*/
 .navbar{
-    background-color: rgba(244, 163, 88, 0.6) !important;
+    background-color: var(--kannouti) !important;
+}
+.navbar-brand{
+  color: white !important;
+  font-weight: bold;
 }
 .menu_ic{
     font-size: 30px;
-    color: var(--yamanemuru);
+    color: white;
     margin-left: 10px;
 }
 .menu_ic:active,.menu_ic:hover{
-  color: var(--hatuyuki);
-  border: solid 1px var(--yamanemuru);
+  color: var(--kangyou);
   text-decoration: none;
 }
 
@@ -61,7 +83,7 @@
   3.1 一色背景
  ---------------------------------*/
 body{
-  background-color: rgb(198, 174, 141,0.5);
+  background-color: rgb(232, 240, 235,0.3);
 }
 
 /*
@@ -76,7 +98,7 @@ body{
   display: block;
   width: 30px;
   height: 30px;
-  background: url(../images/momizi_1.png) no-repeat;
+  background: url(../images/yukinokessyo1.png) no-repeat;
   overflow: hidden;
 }
 .momizi_drop .momizi3,.momizi6{
@@ -88,7 +110,7 @@ body{
   display: block;
   width: 30px;
   height: 30px;
-  background: url(../images/momizi_2.png) no-repeat;
+  background: url(../images/yukinokessyo2.png) no-repeat;
   overflow: hidden;
 }
 .momizi1{
@@ -100,7 +122,7 @@ body{
   display: block;
   width: 30px;
   height: 30px;
-  background: url(../images/momizi_3.png) no-repeat;
+  background: url(../images/yukinokessyo3.png) no-repeat;
   overflow: hidden;
 }
 .momizi3,.momizi5,.momizi6,.momizi8,.momizi1{
@@ -162,7 +184,7 @@ body{
  4.カード設定
  ---------------------------------*/
 .card{
-  background-color: rgb(253, 237, 82,0.5);
+  background-color: rgb(134, 159, 190,0.1);
 }
 .card_head{
   position: relative;
@@ -173,14 +195,14 @@ body{
 .title{
   font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
   font-size: 30px;
-  color: var(--momizi);
+  color: var(--tyu);
   font-weight: bold;
   position: relative;
   left: -33px;
   top: 5px;
 }
 .title span{
-  color: var(--yamanemuru);
+  color: var(--kansizimi);
   font-size: 40px;
 }
 .title_ic{
@@ -191,7 +213,7 @@ body{
   height: 55px;
 }
 .input_label{
-  color: var(--momizi);
+  color: var(--tyu);
   font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
 }
 .input_item{
@@ -205,7 +227,7 @@ body{
  ---------------------------------*/
 h2, h4, p ,h1{
   font-family: "ヒラギノ明朝 ProN","HG明朝E","MS P明朝","MS明朝",serif;
-  color: var(--yamanemuru);
+  color: var(--tyu);
 }
 
 
@@ -215,24 +237,23 @@ h2, h4, p ,h1{
  ---------------------------------*/
  .btn{
   margin-top: 15px;
-  background-color: var(--momizi) !important;
-  color: var(--hatuyuki) !important;
-  border: solid 1px var(--momi);
+  background-color: var(--tyu) !important;
+  color: white !important;
+  border: solid 1px var(--isizue);
   padding: 4px 12px;
 }
 .btn:hover, .btn:active, .btn:focus{
   /*-- カーソルを合わせた時 --*/
-  background-color: var(--kaede) !important;
-  color: var(--yamanemuru) !important;
+  background-color: var(--kannouti) !important;
   /* 影を入れる */
-  box-shadow: 0 0 0 0.2rem var(--hatuyuki) !important;
+  box-shadow: 0 0 0 0.2rem white !important;
   outline: none;
 }
 .btn:active{
   /*-- クリックしている時 --*/
-  background-color: var(--momizi) !important;
+  background-color: var(--tyu) !important;
   /* 影を入れる */
-  box-shadow: 0 0 0 0.2rem var(--hatuyuki) !important;
+  box-shadow: 0 0 0 0.2rem white !important;
 }
 .input_btn{
   text-align: right;
@@ -264,4 +285,10 @@ h2, h4, p ,h1{
   transform: translate(45px,550px);
   opacity: 0;
 }
+}
+
+
+
+.modal-header{
+  background-color: var(--saeru)
 }

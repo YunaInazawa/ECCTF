@@ -13,7 +13,7 @@
 @section('content')
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>Ｑ</span>ｕｅｓｔｉｏｎ - 新規作成</span></div>
+            <div class="card-header"><img class="title_ic" src="images/yukidaruma.png"><span class="title"><span>Ｑ</span>ｕｅｓｔｉｏｎ - 新規作成</span></div>
 
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.question_check') }}">

@@ -13,7 +13,7 @@
 @section('content')
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header"><img class="title_ic" src="{{ asset('images/momizi_3.png') }}"><span class="title"><span>Ｕ</span>ｕｓｅｒ - 編集</span></div>
+            <div class="card-header"><img class="title_ic" src="{{ asset('images/yukidaruma.png') }}"><span class="title"><span>Ｕ</span>ｕｓｅｒ - 編集</span></div>
 
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.user_check') }}">
