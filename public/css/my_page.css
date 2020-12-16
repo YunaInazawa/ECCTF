@@ -52,12 +52,11 @@
 
   .bingo table{
     table-layout: fixed;
-    height: 350px;
     margin: 0;
 }
   
   .bingo table tr td{
-    height: 50px;
+    height: 51px;
     padding: 0;
     
     border: solid 2px var(--tyu);
