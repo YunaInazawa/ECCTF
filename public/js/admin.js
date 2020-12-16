@@ -183,9 +183,9 @@ $(function(){
  function tr_default(tblID){
   // var vTR = tblID + " td";
   // $(vTR).css("background-color","#F4A358");
-  $(tblID).css("background-color","#F4A358");
+  $(tblID).css("background-color","var(--yukinohana)");
  }
  
  function tr_click(trID){
-  trID.css("background-color","#E77433");
+  trID.css("background-color","var(--zyuhyo)");
  }
