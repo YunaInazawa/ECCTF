@@ -74,7 +74,7 @@
     left: 315px;
     height: 65px;
   }
-  .sei img {
+  .sei_img {
     width: 100%;
     object-fit: contain;
     position: absolute;
@@ -83,4 +83,7 @@
   }
   .sei{
     position: relative
+  }
+  .place_none{
+    color: transparent;
   }
