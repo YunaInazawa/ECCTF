@@ -44,7 +44,7 @@
                         @for( $i = 0; $i < count($placeDatas); $i++ )
 
                             @if( $placeDatas[$i] == 'ok' )
-                            <td><div class="sei"><img src="{{ asset('images/sei.png') }}"></div></td>
+                            <td>{{ $placeDatas[$i] }}<div class="sei"><img src="{{ asset('images/sei.png') }}"></div></td>
                             @else
                             <td>{{ $placeDatas[$i] }}</td>
                             @endif
