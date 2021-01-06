@@ -46,7 +46,7 @@
                             @if( $placeDatas[$i] == 'ok' )
                             <td><span class="place_none">{{ $placeDatas[$i] }}</span><div class="sei"><img class="sei_img" src="{{ asset('images/sei.png') }}"></div></td>
                             @else
-                            <td>{{ $placeDatas[$i] }}</td>
+                            <td>{!! nl2br($placeDatas[$i]) !!}</td>
                             @endif
 
                             @if( $i % 5 == 4 && $i != 24 )

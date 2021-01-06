@@ -36,7 +36,7 @@
                             ?>
                             <input type="hidden" name="{{ $count }}" value="{{ $room }}">
                             <td name="test[]" id="id{{ $count }}" onClick="cellClickRoom({{ $i }}, {{ $j }}, {{ $count++ }})" data-toggle="modal" data-target="#exampleModalCenter">
-                                <b>{{ $room }}</b><br />
+                                <b>{!! nl2br($room) !!}</b><br />
                             </td>
                         @endfor
                         </tr>
@@ -49,7 +49,7 @@
 
         <div class="form-group row">
             <div class="col-md-4 offset-md-2 text-md-right input_btn">
-                <button type="button" class="btn btn-primary" onclick=location.href="{{ route('admin.management') }}">
+                <button type="button" class="btn btn-primary" onclick=location.href="{{ route('admin.room_details') }}">
                     {{ __('戻る') }}
                 </button>
 

@@ -21,7 +21,7 @@
                     <tr>
                         @for( $i = 0; $i < count($placeData); $i++ )
                             <td>
-                                <b>[ {{ $placeData[$i]->room_name }} ]</b><br />
+                                <b>[ {!! nl2br($placeData[$i]->room_name) !!} ]</b><br />
                                 <span class="position_code">{{ $placeData[$i]->position_code }}</span>
                             </td>
                             @if( $i % 5 == 4 && $i != 24 )

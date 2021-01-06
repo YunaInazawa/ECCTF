@@ -24,7 +24,7 @@
                         <tr>
                         @for( $j = 0; $j < 5; $j++ )
                             <td>
-                                <b>{{ $input[$count++] }}</b><br />
+                                <b>{!! nl2br($input[$count++]) !!}</b><br />
                             </td>
                         @endfor
                         </tr>
