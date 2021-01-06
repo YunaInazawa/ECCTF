@@ -4,6 +4,10 @@ $course_list = ['IE3A', 'IE4A'];
 
 @extends('layouts.app_header')
 
+@section('stylesheet')
+<link href="{{ asset('css/app_guest.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="momizi_drop col-lg-12">
     <div class="momizi1 momizi"></div>

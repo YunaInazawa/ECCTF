@@ -27,7 +27,7 @@
             <h1>ＢＩＮＧＯ</h1>
         </div>
 
-        <div class="form-group col-md-8">
+        <div class="form-group ">
             <div class="bingo">
                 <table class="table table-bordered">
                     <!-- <tr>
@@ -90,7 +90,7 @@
         @if( $ag->pivot->quantity != 0 )
         <div class="form-group row gift-box">
             <div class="col-md-4 col-sm-4 text-right"><img src="{{ $ag->image_path == null ? 'images/noImage.png' : asset('storage/gift/' . $ag->image_path) }}" class="img-responsive fit-image"></div>
-            <div class="col-md-4 col-sm-4 pt-2 text-left">
+            <div class="col-md-8 col-sm-4 pt-2 text-left">
                 <button type="button" class="btn btn_deleate" data-toggle="modal" data-target="#exampleModalCenter" onClick="clickDelete({{ $ag }}, {{ $ag->pivot->quantity }})">
                     <i class="far fa-times-circle fa-lg"></i>
                 </button>

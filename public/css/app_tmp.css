@@ -292,3 +292,9 @@ h2, h4, p ,h1{
 .modal-header{
   background-color: var(--saeru)
 }
+
+@media screen and (min-width: 768px) {
+  .input_item{
+      margin-top: 20px;
+  }
+}
