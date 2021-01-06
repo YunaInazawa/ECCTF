@@ -5,7 +5,7 @@
 @section('content')
 <div class="col-md-8">
     <div class="card">
-        <div class="card_head"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>パ</span>スワード変更</span></div>
+        <div class="card_head"><img class="title_ic" src="images/yukidaruma.png"><span class="title"><span>パ</span>スワード変更</span></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('player.pass_update') }}">
@@ -42,6 +42,9 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4 input_btn">
+                    <button type="button" class="btn btn-primary" onclick=location.href="{{ route('player.my_page') }}">
+                            {{ __('戻る') }}
+                        </button>
                         <button type="submit" class="btn btn-primary">
                             {{ __('変更') }}
                         </button>

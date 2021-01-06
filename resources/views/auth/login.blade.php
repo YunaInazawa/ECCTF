@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="momizi_drop" col-lg-12">
+<div class="momizi_drop col-lg-12">
     <div class="momizi1 momizi"></div>
     <div class="momizi2 momizi"></div>
     <div class="momizi3 momizi"></div>
