@@ -89,58 +89,58 @@ class ChoicesTableSeeder extends Seeder
         DB::table('choices')->insert($list);
 
         // テストデータ
-        for( $i = 1; $i <= 54; $i++ ){
-            $question = Question::where('text', 'Q.' . $i . ' : TEXT')->first();
+        // for( $i = 1; $i <= 54; $i++ ){
+        //     $question = Question::where('text', 'Q.' . $i . ' : TEXT')->first();
 
-            if( $question->type->name == '択一クイズ' ) {
-                $ans = array(true, false, false, false);
-                shuffle($ans);
+        //     if( $question->type->name == '択一クイズ' ) {
+        //         $ans = array(true, false, false, false);
+        //         shuffle($ans);
 
-                for( $j = 1; $j <= 4; $j++ ){
-                    DB::table('choices')->insert([
-                        'text' => 'Q.' . $i . ' : ANSWER' . $j,
-                        'is_correct' => $ans[$j-1],
-                        'question_id' => $question->id,
-                        'created_at' => $now, 
-                        'updated_at' => $now,
-                    ]);
-                }
+        //         for( $j = 1; $j <= 4; $j++ ){
+        //             DB::table('choices')->insert([
+        //                 'text' => 'Q.' . $i . ' : ANSWER' . $j,
+        //                 'is_correct' => $ans[$j-1],
+        //                 'question_id' => $question->id,
+        //                 'created_at' => $now, 
+        //                 'updated_at' => $now,
+        //             ]);
+        //         }
 
-            } elseif( $question->type->name == '二択クイズ' ) {
-                $ans = array(true, false);
-                shuffle($ans);
+        //     } elseif( $question->type->name == '二択クイズ' ) {
+        //         $ans = array(true, false);
+        //         shuffle($ans);
 
-                for( $j = 1; $j <= 2; $j++ ){
-                    DB::table('choices')->insert([
-                        'text' => 'Q.' . $i . ' : ANSWER' . $j,
-                        'is_correct' => $ans[$j-1],
-                        'question_id' => $question->id,
-                        'created_at' => $now, 
-                        'updated_at' => $now,
-                    ]);
-                }
+        //         for( $j = 1; $j <= 2; $j++ ){
+        //             DB::table('choices')->insert([
+        //                 'text' => 'Q.' . $i . ' : ANSWER' . $j,
+        //                 'is_correct' => $ans[$j-1],
+        //                 'question_id' => $question->id,
+        //                 'created_at' => $now, 
+        //                 'updated_at' => $now,
+        //             ]);
+        //         }
 
-            } elseif( $question->type->name == '多答クイズ' ) {
-                for( $j = 1; $j <= 6; $j++ ){
-                    DB::table('choices')->insert([
-                        'text' => 'Q.' . $i . ' : ANSWER' . $j,
-                        'is_correct' => mt_rand(0, 1),
-                        'question_id' => $question->id,
-                        'created_at' => $now, 
-                        'updated_at' => $now,
-                    ]);
-                }
+        //     } elseif( $question->type->name == '多答クイズ' ) {
+        //         for( $j = 1; $j <= 6; $j++ ){
+        //             DB::table('choices')->insert([
+        //                 'text' => 'Q.' . $i . ' : ANSWER' . $j,
+        //                 'is_correct' => mt_rand(0, 1),
+        //                 'question_id' => $question->id,
+        //                 'created_at' => $now, 
+        //                 'updated_at' => $now,
+        //             ]);
+        //         }
 
-            } else {
-                DB::table('choices')->insert([
-                    'text' => 'Q.' . $i . ' : ANSWER',
-                    'is_correct' => true,
-                    'question_id' => $question->id,
-                    'created_at' => $now, 
-                    'updated_at' => $now,
-                ]);
-            }
+        //     } else {
+        //         DB::table('choices')->insert([
+        //             'text' => 'Q.' . $i . ' : ANSWER',
+        //             'is_correct' => true,
+        //             'question_id' => $question->id,
+        //             'created_at' => $now, 
+        //             'updated_at' => $now,
+        //         ]);
+        //     }
             
-        }
+        // }
     }
 }
