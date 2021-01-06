@@ -17,14 +17,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('student_num');
+            $table->string('student_num');
             $table->string('password');
             $table->boolean('is_admin')->default(false);
             $table->foreignId('course_id')
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->integer('point');
+            $table->integer('point')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

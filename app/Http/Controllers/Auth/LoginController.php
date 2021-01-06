@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo() {
+        if( $this->guard()->user()->is_admin ){
+            return RouteServiceProvider::ADMIN;
+        }else{
+            return RouteServiceProvider::HOME;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -36,5 +44,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * ログアウト時の遷移先を変更
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect(route('login'));
     }
 }

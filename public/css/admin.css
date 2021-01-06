@@ -1,0 +1,52 @@
+thead th {
+    background: var(--tyu);
+    color: #fff;
+}
+
+tbody tr.clickable:hover td {
+    background: var(--sasuga);
+    cursor: pointer;
+}
+
+.lie-link:hover {
+    color: blue;
+    
+}
+
+#giftImage img {
+    height: 500px;
+    
+}
+
+.giftImageTable img, #modal-image-admin img {
+    height: 200px;
+    
+}
+
+.bingo{
+    width: 620px;
+    height: 500px;
+    padding: 20px;
+    margin: 2em auto;
+    background: var(--yukinohana);
+    box-shadow: 0px 0px 0px 10px var(--yukinohana);
+    border: dashed 2px white;
+}
+
+.bingo table{
+    table-layout: fixed;
+    height: 450px;
+    margin: 0;
+}
+
+.bingo table tr td{
+    padding: auto 0;
+    height: 50px;
+
+    border: solid 2px var(--tyu);
+}
+
+.position_code {
+    font-size: 12px;
+
+}

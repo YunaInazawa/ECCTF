@@ -8,6 +8,10 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Course;
+
+use App\Mail\EntryEmail;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -29,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::REGISTERED;
 
     /**
      * Create a new controller instance.
@@ -50,8 +54,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'course' => ['required'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'student_num' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +70,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $course_id = Course::where('name', $data['course'])->first()->id;
+        Mail::to($data['email'])->send(new EntryEmail($data));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'student_num' => $data['student_num'],
             'password' => Hash::make($data['password']),
+            'course_id' => $course_id,
         ]);
     }
 }
