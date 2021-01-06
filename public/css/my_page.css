@@ -37,7 +37,7 @@
   } */
 
   .bingo{
-    width: 80%;
+    width: 292px;
     height: 300px;
     padding: 20px;
     margin: 2em auto;
@@ -68,7 +68,7 @@
   .bingo_momizi{
     position: absolute;
     transform: rotateY( 180deg );
-    top: 265px;
+    top:355px;
     width: 70px;
     left: 315px;
     height: 65px;
@@ -86,3 +86,12 @@
   .place_none{
     color: transparent;
   }
+
+@media screen and (min-width: 768px) {
+  .input_item{
+    margin-top: 20px;
+  }
+  .bingo_momizi{
+    left: 472px;
+  }
+}
