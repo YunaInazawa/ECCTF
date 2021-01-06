@@ -23,7 +23,7 @@
     </div>
 
     <div class="card">
-        <div class="card_head"><img class="title_ic" src="images/momizi_3.png"><span class="title"><span>企</span>画説明</span></div>
+        <div class="card_head"><img class="title_ic" src="images/yukidaruma.png"><span class="title"><span>企</span>画説明</span></div>
         <div class="card-body">
 
             <p><button class="btn" onclick=location.href="{{ route('register') }}">参加登録</button></p>
