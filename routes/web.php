@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/first', 'FirstController@description')->name('player.description');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/question/{code}', 'PlayerController@question')->name('player.question');
 Route::post('/check', 'PlayerController@check')->name('player.check');
