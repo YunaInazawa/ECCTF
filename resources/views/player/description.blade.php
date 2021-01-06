@@ -35,10 +35,12 @@
             学内各所にあるQRコードを読み込み、<br />
             表示されるクイズに正解すると、<br />
             カードにスタンプが押されます<br /><br />
+            <img style="width:30%;" src="{{ asset('images/first_sei.jpg') }}"><br /><br />
             縦横ナナメの、<br />
             どこか１列が揃うごとに１Ｐ<br /><br />
             ポイントを使用して応募すると、<br />
-            抽選で豪華景品を獲得！<br />
+            抽選で豪華景品を獲得！<br /><br />
+            <img style="width:80%;" src="{{ asset('images/first_bingo.png') }}"><br />
             <br /></p>
 
             <p>【 ECCTF の流れ 】<br /><br />
@@ -65,15 +67,19 @@
             <p><button class="btn" onclick=location.href="{{ route('register') }}">参加登録</button></p>
 
             <p>【 Ｑ＆Ａ 】<br /><br />
+            
             [ Q. ユーザ情報を間違えて登録してしまった ]<br />
             A. 「クラス」「学籍番号」「名前」と、<br />
             「間違えた項目」「正しい情報」を本文に記載し、<br />
-            下記の問い合わせ先まで連絡お願い致します。<br />
+            下記の問い合わせ先まで連絡お願い致します。<br /><br />
+
+            その他、ご意見・ご質問などございましたら、<br />
+            お気軽にお問い合わせください。<br />
             <br /></p>
 
             <p>【 問い合わせ 】<br />
             ecc.gakuseikai.ecctf@gmail.com<br />
-            [ 担当: IE4A 稲澤 ]<br />
+            [ 担当: IE4A 稲澤 <いなざわ> ]<br />
             <br /></p>
         </div>
     </div>
