@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="col-md-12">
-    <form class="text-center" action="http://localhost:8000/challenge">
+    <form class="text-center" action="{{ route('player.challenge') }}">
         <div class="form-group">
             <!-- フラッシュメッセージ -->
             @if (session('flash_message'))

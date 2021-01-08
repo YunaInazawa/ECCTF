@@ -13,7 +13,7 @@
     パスワードの再設定をお願い致します。<br />
     <br />
     [ ログインページ URL ]<br />
-    login.utl
+    https://ecctf.iischool.net/my_page<br />
 
 </p>
 
